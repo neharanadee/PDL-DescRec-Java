@@ -11,18 +11,18 @@ import java.util.ArrayList;
 //clase de los token devueltos
 class Yytoken {
     Yytoken (int numToken,String token, String tipo, int linea, int columna){
-        //Contador para el número de tokens reconocidos
+        //Contador para el numero de tokens reconocidos
         this.numToken = numToken;
         //String del token reconocido
         this.token = new String(token);
-        //Tipo de componente léxico encontrado
+        //Tipo de componente lexico encontrado
         this.tipo = tipo;
-        //Número de linea
+        //N�mero de linea
         this.linea = linea;
-        //Columna donde empieza el primer carácter del token
+        //Columna donde empieza el primer caracter del token
         this.columna = columna;
     }
-    //Métodos de los atributos de la clase
+    //Metodos de los atributos de la clase
     public int numToken;
     public String token;
     public String tipo;
@@ -66,12 +66,12 @@ public class AnalizadorLexico {
    * Translates characters to character classes
    */
   private static final String ZZ_CMAP_PACKED = 
-    "\11\0\1\3\1\4\2\0\1\5\22\0\1\3\1\0\1\32\2\0"+
-    "\1\17\1\16\1\0\1\10\1\11\1\31\1\14\1\7\2\0\1\30"+
-    "\12\2\1\0\1\6\1\0\1\15\3\0\32\1\6\0\1\25\1\36"+
-    "\1\40\1\1\1\23\1\24\1\1\1\41\1\34\1\1\1\45\1\26"+
-    "\1\44\1\35\1\37\1\43\1\1\1\21\1\27\1\20\1\22\1\33"+
-    "\1\42\3\1\1\12\1\0\1\13\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uff92\0";
+    "\11\0\1\4\1\5\2\0\1\6\22\0\1\4\1\0\1\33\2\0"+
+    "\1\20\1\17\1\0\1\11\1\12\1\32\1\15\1\10\2\0\1\31"+
+    "\12\2\1\0\1\7\1\0\1\16\3\0\32\1\4\0\1\3\1\0"+
+    "\1\26\1\37\1\41\1\1\1\24\1\25\1\1\1\42\1\35\1\1"+
+    "\1\46\1\27\1\45\1\36\1\40\1\44\1\1\1\22\1\30\1\21"+
+    "\1\23\1\34\1\43\3\1\1\13\1\0\1\14\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uff92\0";
 
   /** 
    * Translates characters to character classes
@@ -86,13 +86,13 @@ public class AnalizadorLexico {
   private static final String ZZ_ACTION_PACKED_0 =
     "\1\0\1\1\1\2\1\3\2\4\1\5\1\6\1\7"+
     "\1\10\1\11\1\12\1\13\1\14\2\0\3\1\2\0"+
-    "\6\1\1\15\1\16\1\17\4\1\1\0\1\20\1\1"+
-    "\1\21\11\1\1\22\1\0\1\23\1\24\5\1\1\25"+
-    "\3\1\1\26\1\27\3\1\1\30\1\31\1\32\1\1"+
-    "\1\33\1\34";
+    "\6\1\1\15\1\16\1\17\5\1\1\0\1\20\1\1"+
+    "\1\21\12\1\1\22\1\0\1\23\1\24\5\1\1\25"+
+    "\5\1\1\26\4\1\1\27\1\30\1\1\1\31\1\1"+
+    "\1\32\2\1\1\33\1\1\1\34\1\35";
 
   private static int [] zzUnpackAction() {
-    int [] result = new int[71];
+    int [] result = new int[81];
     int offset = 0;
     offset = zzUnpackAction(ZZ_ACTION_PACKED_0, offset, result);
     return result;
@@ -117,18 +117,20 @@ public class AnalizadorLexico {
   private static final int [] ZZ_ROWMAP = zzUnpackRowMap();
 
   private static final String ZZ_ROWMAP_PACKED_0 =
-    "\0\0\0\46\0\114\0\162\0\162\0\230\0\162\0\162"+
-    "\0\162\0\162\0\162\0\162\0\162\0\276\0\344\0\u010a"+
-    "\0\u0130\0\u0156\0\u017c\0\u01a2\0\u01c8\0\u01ee\0\u0214\0\u023a"+
-    "\0\u0260\0\u0286\0\u02ac\0\162\0\162\0\162\0\u02d2\0\u02f8"+
-    "\0\u031e\0\u0344\0\u036a\0\162\0\u0390\0\46\0\u03b6\0\u03dc"+
-    "\0\u0402\0\u0428\0\u044e\0\u0474\0\u049a\0\u04c0\0\u04e6\0\46"+
-    "\0\u050c\0\46\0\46\0\u0532\0\u0558\0\u057e\0\u05a4\0\u05ca"+
-    "\0\46\0\u05f0\0\u0616\0\u063c\0\46\0\46\0\u0662\0\u0688"+
-    "\0\u06ae\0\46\0\46\0\46\0\u06d4\0\46\0\46";
+    "\0\0\0\47\0\116\0\165\0\165\0\234\0\165\0\165"+
+    "\0\165\0\165\0\165\0\165\0\165\0\303\0\352\0\u0111"+
+    "\0\u0138\0\u015f\0\u0186\0\u01ad\0\u01d4\0\u01fb\0\u0222\0\u0249"+
+    "\0\u0270\0\u0297\0\u02be\0\165\0\165\0\165\0\u02e5\0\u030c"+
+    "\0\u0333\0\u035a\0\u0381\0\u03a8\0\165\0\u03cf\0\47\0\u03f6"+
+    "\0\u041d\0\u0444\0\u046b\0\u0492\0\u04b9\0\u04e0\0\u0507\0\u052e"+
+    "\0\u0555\0\47\0\u057c\0\47\0\47\0\u05a3\0\u05ca\0\u05f1"+
+    "\0\u0618\0\u063f\0\47\0\u0666\0\u068d\0\u06b4\0\u06db\0\u0702"+
+    "\0\47\0\u0729\0\u0750\0\u0777\0\u079e\0\47\0\47\0\u07c5"+
+    "\0\47\0\u07ec\0\47\0\u0813\0\u083a\0\47\0\u0861\0\47"+
+    "\0\47";
 
   private static int [] zzUnpackRowMap() {
-    int [] result = new int[71];
+    int [] result = new int[81];
     int offset = 0;
     offset = zzUnpackRowMap(ZZ_ROWMAP_PACKED_0, offset, result);
     return result;
@@ -151,52 +153,62 @@ public class AnalizadorLexico {
   private static final int [] ZZ_TRANS = zzUnpackTrans();
 
   private static final String ZZ_TRANS_PACKED_0 =
-    "\1\0\1\2\1\3\1\4\1\5\1\6\1\7\1\10"+
-    "\1\11\1\12\1\13\1\14\1\15\1\16\1\17\1\20"+
-    "\1\21\1\22\2\2\1\23\3\2\1\24\1\0\1\25"+
-    "\1\26\1\27\1\2\1\30\1\2\1\31\1\2\1\32"+
-    "\1\33\2\2\1\0\2\2\15\0\10\2\3\0\13\2"+
-    "\2\0\1\3\115\0\1\5\56\0\1\34\46\0\1\35"+
-    "\44\0\1\36\31\0\2\2\15\0\1\2\1\37\6\2"+
-    "\3\0\13\2\1\0\2\2\15\0\3\2\1\40\4\2"+
-    "\3\0\13\2\1\0\2\2\15\0\5\2\1\41\2\2"+
-    "\3\0\4\2\1\42\6\2\31\0\1\43\14\0\32\25"+
-    "\1\44\13\25\1\0\2\2\15\0\5\2\1\45\2\2"+
-    "\3\0\13\2\1\0\2\2\15\0\4\2\1\46\3\2"+
-    "\3\0\2\2\1\47\10\2\1\0\2\2\15\0\1\2"+
-    "\1\50\6\2\3\0\4\2\1\51\6\2\1\0\2\2"+
-    "\15\0\10\2\3\0\6\2\1\52\4\2\1\0\2\2"+
-    "\15\0\1\2\1\53\6\2\3\0\13\2\1\0\2\2"+
-    "\15\0\1\2\1\54\6\2\3\0\13\2\1\0\2\2"+
-    "\15\0\2\2\1\55\5\2\3\0\13\2\1\0\2\2"+
-    "\15\0\1\56\7\2\3\0\13\2\1\0\2\2\15\0"+
-    "\6\2\1\57\1\2\3\0\13\2\1\0\2\2\15\0"+
-    "\1\2\1\60\6\2\3\0\13\2\31\43\1\61\14\43"+
-    "\1\0\2\2\15\0\1\2\1\62\6\2\3\0\13\2"+
-    "\1\0\2\2\15\0\1\63\7\2\3\0\13\2\1\0"+
-    "\2\2\15\0\3\2\1\64\4\2\3\0\13\2\1\0"+
-    "\2\2\15\0\10\2\3\0\4\2\1\65\6\2\1\0"+
-    "\2\2\15\0\5\2\1\66\2\2\3\0\13\2\1\0"+
-    "\2\2\15\0\10\2\3\0\1\2\1\67\11\2\1\0"+
-    "\2\2\15\0\10\2\3\0\4\2\1\70\6\2\1\0"+
-    "\2\2\15\0\3\2\1\71\4\2\3\0\13\2\1\0"+
-    "\2\2\15\0\2\2\1\72\5\2\3\0\13\2\1\0"+
-    "\2\2\15\0\7\2\1\73\3\0\13\2\30\43\1\4"+
-    "\1\61\14\43\1\0\2\2\15\0\5\2\1\74\2\2"+
-    "\3\0\13\2\1\0\2\2\15\0\6\2\1\75\1\2"+
-    "\3\0\13\2\1\0\2\2\15\0\1\2\1\76\6\2"+
-    "\3\0\13\2\1\0\2\2\15\0\1\77\7\2\3\0"+
-    "\13\2\1\0\2\2\15\0\10\2\3\0\11\2\1\100"+
-    "\1\2\1\0\2\2\15\0\1\2\1\101\6\2\3\0"+
-    "\13\2\1\0\2\2\15\0\3\2\1\102\4\2\3\0"+
-    "\13\2\1\0\2\2\15\0\10\2\3\0\12\2\1\103"+
-    "\1\0\2\2\15\0\3\2\1\104\4\2\3\0\13\2"+
-    "\1\0\2\2\15\0\10\2\3\0\10\2\1\105\2\2"+
-    "\1\0\2\2\15\0\10\2\3\0\2\2\1\106\10\2"+
-    "\1\0\2\2\15\0\1\107\7\2\3\0\13\2";
+    "\1\0\1\2\1\3\1\0\1\4\1\5\1\6\1\7"+
+    "\1\10\1\11\1\12\1\13\1\14\1\15\1\16\1\17"+
+    "\1\20\1\21\1\22\2\2\1\23\3\2\1\24\1\0"+
+    "\1\25\1\26\1\27\1\2\1\30\1\2\1\31\1\2"+
+    "\1\32\1\33\2\2\1\0\3\2\15\0\10\2\3\0"+
+    "\13\2\2\0\1\3\120\0\1\5\57\0\1\34\47\0"+
+    "\1\35\45\0\1\36\31\0\3\2\15\0\1\2\1\37"+
+    "\6\2\3\0\13\2\1\0\3\2\15\0\3\2\1\40"+
+    "\4\2\3\0\13\2\1\0\3\2\15\0\2\2\1\41"+
+    "\2\2\1\42\2\2\3\0\4\2\1\43\6\2\32\0"+
+    "\1\44\14\0\33\25\1\45\13\25\1\0\3\2\15\0"+
+    "\5\2\1\46\2\2\3\0\13\2\1\0\3\2\15\0"+
+    "\4\2\1\47\3\2\3\0\2\2\1\50\10\2\1\0"+
+    "\3\2\15\0\1\2\1\51\6\2\3\0\4\2\1\52"+
+    "\6\2\1\0\3\2\15\0\10\2\3\0\6\2\1\53"+
+    "\4\2\1\0\3\2\15\0\1\2\1\54\6\2\3\0"+
+    "\13\2\1\0\3\2\15\0\1\2\1\55\6\2\3\0"+
+    "\13\2\1\0\3\2\15\0\2\2\1\56\5\2\3\0"+
+    "\13\2\1\0\3\2\15\0\1\57\7\2\3\0\13\2"+
+    "\1\0\3\2\15\0\10\2\3\0\2\2\1\60\10\2"+
+    "\1\0\3\2\15\0\6\2\1\61\1\2\3\0\13\2"+
+    "\1\0\3\2\15\0\1\2\1\62\6\2\3\0\13\2"+
+    "\32\44\1\63\14\44\1\0\3\2\15\0\1\2\1\64"+
+    "\6\2\3\0\13\2\1\0\3\2\15\0\1\65\7\2"+
+    "\3\0\13\2\1\0\3\2\15\0\3\2\1\66\4\2"+
+    "\3\0\13\2\1\0\3\2\15\0\10\2\3\0\4\2"+
+    "\1\67\6\2\1\0\3\2\15\0\5\2\1\70\2\2"+
+    "\3\0\13\2\1\0\3\2\15\0\10\2\3\0\1\2"+
+    "\1\71\11\2\1\0\3\2\15\0\10\2\3\0\4\2"+
+    "\1\72\6\2\1\0\3\2\15\0\3\2\1\73\4\2"+
+    "\3\0\13\2\1\0\3\2\15\0\2\2\1\74\5\2"+
+    "\3\0\13\2\1\0\3\2\15\0\10\2\3\0\5\2"+
+    "\1\75\5\2\1\0\3\2\15\0\7\2\1\76\3\0"+
+    "\13\2\31\44\1\4\1\63\14\44\1\0\3\2\15\0"+
+    "\5\2\1\77\2\2\3\0\13\2\1\0\3\2\15\0"+
+    "\6\2\1\100\1\2\3\0\13\2\1\0\3\2\15\0"+
+    "\1\2\1\101\6\2\3\0\13\2\1\0\3\2\15\0"+
+    "\1\102\7\2\3\0\13\2\1\0\3\2\15\0\10\2"+
+    "\3\0\11\2\1\103\1\2\1\0\3\2\15\0\1\2"+
+    "\1\104\6\2\3\0\13\2\1\0\3\2\15\0\1\105"+
+    "\7\2\3\0\13\2\1\0\3\2\15\0\3\2\1\106"+
+    "\4\2\3\0\13\2\1\0\3\2\15\0\10\2\3\0"+
+    "\12\2\1\107\1\0\3\2\15\0\3\2\1\110\4\2"+
+    "\3\0\13\2\1\0\3\2\15\0\3\2\1\111\4\2"+
+    "\3\0\13\2\1\0\3\2\15\0\10\2\3\0\10\2"+
+    "\1\112\2\2\1\0\3\2\15\0\10\2\3\0\2\2"+
+    "\1\113\10\2\1\0\3\2\15\0\10\2\3\0\1\2"+
+    "\1\114\11\2\1\0\3\2\15\0\5\2\1\115\2\2"+
+    "\3\0\13\2\1\0\3\2\15\0\1\116\7\2\3\0"+
+    "\13\2\1\0\3\2\15\0\10\2\3\0\4\2\1\117"+
+    "\6\2\1\0\3\2\15\0\10\2\3\0\2\2\1\120"+
+    "\10\2\1\0\3\2\15\0\10\2\3\0\2\2\1\121"+
+    "\10\2";
 
   private static int [] zzUnpackTrans() {
-    int [] result = new int[1786];
+    int [] result = new int[2184];
     int offset = 0;
     offset = zzUnpackTrans(ZZ_TRANS_PACKED_0, offset, result);
     return result;
@@ -235,11 +247,11 @@ public class AnalizadorLexico {
 
   private static final String ZZ_ATTRIBUTE_PACKED_0 =
     "\1\0\2\1\2\11\1\1\7\11\1\1\2\0\3\1"+
-    "\2\0\6\1\3\11\4\1\1\0\1\11\14\1\1\0"+
-    "\26\1";
+    "\2\0\6\1\3\11\5\1\1\0\1\11\15\1\1\0"+
+    "\36\1";
 
   private static int [] zzUnpackAttribute() {
-    int [] result = new int[71];
+    int [] result = new int[81];
     int offset = 0;
     offset = zzUnpackAttribute(ZZ_ATTRIBUTE_PACKED_0, offset, result);
     return result;
@@ -319,11 +331,11 @@ public class AnalizadorLexico {
     private int contador;
     private ArrayList<Yytoken> tokens;
 
-	private void writeOutputFile() throws IOException{
-			String filename = "file.out";
+	private void escribirEnFichero() throws IOException{
+			String filename = "Tokens.txt";
 			BufferedWriter out = new BufferedWriter(
 				new FileWriter(filename));
-            System.out.println("\n*** Tokens guardados en archivo ***\n");
+            System.out.println("Fichero Tokens.txt generado");
 			for(Yytoken t: this.tokens){
 				System.out.println(t);
 				out.write(t + "\n");
@@ -354,7 +366,7 @@ public class AnalizadorLexico {
     char [] map = new char[0x110000];
     int i = 0;  /* index in packed string  */
     int j = 0;  /* index in unpacked array */
-    while (i < 144) {
+    while (i < 148) {
       int  count = packed.charAt(i++);
       char value = packed.charAt(i++);
       do map[j++] = value; while (--count > 0);
@@ -565,7 +577,10 @@ public class AnalizadorLexico {
     if (!zzEOFDone) {
       zzEOFDone = true;
     	try{
-		this.writeOutputFile();
+	    contador++;
+	    Yytoken t = new Yytoken(contador,"","eof",yyline,yycolumn);
+	    tokens.add(t);
+		this.escribirEnFichero();
         System.exit(0);
 	}catch(IOException ioe){
 		ioe.printStackTrace();
@@ -582,7 +597,7 @@ public class AnalizadorLexico {
    * @return      the next token
    * @exception   java.io.IOException  if any I/O-Error occurs
    */
-  public Yytoken nextToken() throws java.io.IOException {
+  public Yytoken sigToken() throws java.io.IOException {
     int zzInput;
     int zzAction;
 
@@ -719,12 +734,7 @@ public class AnalizadorLexico {
       if (zzInput == YYEOF && zzStartRead == zzCurrentPos) {
         zzAtEOF = true;
             zzDoEOF();
-              {
-                contador++;
-  Yytoken t = new Yytoken(contador,"","eof",yyline,yycolumn);
-  tokens.add(t);
-  return t;
-              }
+        return null;
       }
       else {
         switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {
@@ -734,193 +744,200 @@ public class AnalizadorLexico {
     tokens.add(t);
     return t;
             }
-          case 29: break;
+          case 30: break;
           case 2: 
             { contador++;
     Yytoken t = new Yytoken(contador,yytext(),"Num",yyline,yycolumn);
     tokens.add(t);
     return t;
             }
-          case 30: break;
+          case 31: break;
           case 3: 
             { //ignorar
             }
-          case 31: break;
+          case 32: break;
           case 4: 
             { contador++;
     Yytoken t = new Yytoken(contador,"","eol",yyline,yycolumn);
     tokens.add(t);
     return t;
             }
-          case 32: break;
+          case 33: break;
           case 5: 
             { contador++;
-    Yytoken t = new Yytoken(contador,yytext(),"PtComa",yyline,yycolumn);
-    tokens.add(t);
-    return t;
-            }
-          case 33: break;
-          case 6: 
-            { contador++;
-    Yytoken t = new Yytoken(contador,yytext(),"Coma",yyline,yycolumn);
+    Yytoken t = new Yytoken(contador,";","PtComa",yyline,yycolumn);
     tokens.add(t);
     return t;
             }
           case 34: break;
-          case 7: 
+          case 6: 
             { contador++;
-    Yytoken t = new Yytoken(contador,yytext(),"ParAb",yyline,yycolumn);
+    Yytoken t = new Yytoken(contador,",","Coma",yyline,yycolumn);
     tokens.add(t);
     return t;
             }
           case 35: break;
-          case 8: 
+          case 7: 
             { contador++;
-    Yytoken t = new Yytoken(contador,yytext(),"ParCer",yyline,yycolumn);
+    Yytoken t = new Yytoken(contador,"(","ParAb",yyline,yycolumn);
     tokens.add(t);
     return t;
             }
           case 36: break;
-          case 9: 
+          case 8: 
             { contador++;
-    Yytoken t = new Yytoken(contador,yytext(),"LlavAb",yyline,yycolumn);
+    Yytoken t = new Yytoken(contador,")","ParCer",yyline,yycolumn);
     tokens.add(t);
     return t;
             }
           case 37: break;
-          case 10: 
+          case 9: 
             { contador++;
-    Yytoken t = new Yytoken(contador,yytext(),"LlavCer",yyline,yycolumn);
+    Yytoken t = new Yytoken(contador,"{","LlavAb",yyline,yycolumn);
     tokens.add(t);
     return t;
             }
           case 38: break;
-          case 11: 
+          case 10: 
             { contador++;
-    Yytoken t = new Yytoken(contador,yytext(),"OpAritSum",yyline,yycolumn);
+    Yytoken t = new Yytoken(contador,"}","LlavCer",yyline,yycolumn);
     tokens.add(t);
     return t;
             }
           case 39: break;
-          case 12: 
+          case 11: 
             { contador++;
-    Yytoken t = new Yytoken(contador,yytext(),"OpAsig",yyline,yycolumn);
+    Yytoken t = new Yytoken(contador,"+","OpAritSum",yyline,yycolumn);
     tokens.add(t);
     return t;
             }
           case 40: break;
-          case 13: 
+          case 12: 
             { contador++;
-    Yytoken t = new Yytoken(contador,yytext(),"OpRelacIgual",yyline,yycolumn);
+    Yytoken t = new Yytoken(contador,"=","OpAsig",yyline,yycolumn);
     tokens.add(t);
     return t;
             }
           case 41: break;
-          case 14: 
+          case 13: 
             { contador++;
-    Yytoken t = new Yytoken(contador,yytext(),"OpLogAnd",yyline,yycolumn);
+    Yytoken t = new Yytoken(contador,"==","OpRelacIgual",yyline,yycolumn);
     tokens.add(t);
     return t;
             }
           case 42: break;
-          case 15: 
+          case 14: 
             { contador++;
-    Yytoken t = new Yytoken(contador,yytext(),"OpAsigMod",yyline,yycolumn);
+    Yytoken t = new Yytoken(contador,"&&","OpLogAnd",yyline,yycolumn);
     tokens.add(t);
     return t;
             }
           case 43: break;
+          case 15: 
+            { contador++;
+    Yytoken t = new Yytoken(contador,"%=","OpAsigMod",yyline,yycolumn);
+    tokens.add(t);
+    return t;
+            }
+          case 44: break;
           case 16: 
             { contador++;
     Yytoken t = new Yytoken(contador,yytext(),"Cadena",yyline,yycolumn);
     tokens.add(t);
     return t;
             }
-          case 44: break;
+          case 45: break;
           case 17: 
             { contador++;
-    Yytoken t = new Yytoken(contador,"if","PalReserv",yyline,yycolumn);
-    tokens.add(t);
-    return t;
-            }
-          case 45: break;
-          case 18: 
-            { contador++;
-    Yytoken t = new Yytoken(contador,"for","PalReserv",yyline,yycolumn);
+    Yytoken t = new Yytoken(contador,"if","PalRes",yyline,yycolumn);
     tokens.add(t);
     return t;
             }
           case 46: break;
-          case 19: 
+          case 18: 
             { contador++;
-    Yytoken t = new Yytoken(contador,"var","PalReserv",yyline,yycolumn);
+    Yytoken t = new Yytoken(contador,"for","PalRes",yyline,yycolumn);
     tokens.add(t);
     return t;
             }
           case 47: break;
-          case 20: 
+          case 19: 
             { contador++;
-    Yytoken t = new Yytoken(contador,"int","PalReserv",yyline,yycolumn);
+    Yytoken t = new Yytoken(contador,"var","PalRes",yyline,yycolumn);
     tokens.add(t);
     return t;
             }
           case 48: break;
-          case 21: 
+          case 20: 
             { contador++;
-    Yytoken t = new Yytoken(contador,"1","Boolean",yyline,yycolumn);
+    Yytoken t = new Yytoken(contador,"int","PalRes",yyline,yycolumn);
     tokens.add(t);
     return t;
             }
           case 49: break;
-          case 22: 
+          case 21: 
             { contador++;
-    Yytoken t = new Yytoken(contador,"bool","PalReserv",yyline,yycolumn);
+    Yytoken t = new Yytoken(contador,"true","Boolean",yyline,yycolumn);
     tokens.add(t);
     return t;
             }
           case 50: break;
-          case 23: 
+          case 22: 
             { contador++;
-    Yytoken t = new Yytoken(contador,"char","PalReserv",yyline,yycolumn);
+    Yytoken t = new Yytoken(contador,"char","PalRes",yyline,yycolumn);
     tokens.add(t);
     return t;
             }
           case 51: break;
-          case 24: 
+          case 23: 
             { contador++;
-    Yytoken t = new Yytoken(contador,"0","Boolean",yyline,yycolumn);
+    Yytoken t = new Yytoken(contador,"false","Boolean",yyline,yycolumn);
     tokens.add(t);
     return t;
             }
           case 52: break;
-          case 25: 
+          case 24: 
             { contador++;
-    Yytoken t = new Yytoken(contador,"break","PalReserv",yyline,yycolumn);
+    Yytoken t = new Yytoken(contador,"break","PalRes",yyline,yycolumn);
     tokens.add(t);
     return t;
             }
           case 53: break;
-          case 26: 
+          case 25: 
             { contador++;
-    Yytoken t = new Yytoken(contador,"write","PalReserv",yyline,yycolumn);
+    Yytoken t = new Yytoken(contador,"write","PalRes",yyline,yycolumn);
     tokens.add(t);
     return t;
             }
           case 54: break;
-          case 27: 
+          case 26: 
             { contador++;
-    Yytoken t = new Yytoken(contador,"return","PalReserv",yyline,yycolumn);
+    Yytoken t = new Yytoken(contador,"return","PalRes",yyline,yycolumn);
     tokens.add(t);
     return t;
             }
           case 55: break;
-          case 28: 
+          case 27: 
             { contador++;
-    Yytoken t = new Yytoken(contador,"prompt","PalReserv",yyline,yycolumn);
+    Yytoken t = new Yytoken(contador,"prompt","PalRes",yyline,yycolumn);
     tokens.add(t);
     return t;
             }
           case 56: break;
+          case 28: 
+            { contador++;
+    Yytoken t = new Yytoken(contador,"boolean","PalRes",yyline,yycolumn);
+    tokens.add(t);
+    return t;
+            }
+          case 57: break;
+          case 29: 
+            { contador++;
+    Yytoken t = new Yytoken(contador,"function","PalRes",yyline,yycolumn);
+    tokens.add(t);
+    return t;
+            }
+          case 58: break;
           default:
             zzScanError(ZZ_NO_MATCH);
         }

@@ -2,7 +2,7 @@
 /******* José Luis Fuertes, 5, septiembre, 2015 *********/
 /* El ejemplo incorpora elementos del lenguaje opcionales y elementos que no hay que implementar */
 
-var chars s	/* variable global cadena */
+var chars s_1_S_0	/* variable global cadena */
 
 function int FactorialRecursivo (int n)	/* n: parámetro formal de la función entera */
 {
@@ -71,7 +71,4 @@ s = "El factorial "	/* Primera sentencia que se ejecutaría*/
 write (s)
 write ("\nIntroduce un 'número'.")
 prompt (num)	/* se lee un número del teclado y se guarda en la variable global num */
-for(i=0;i&&3;i=i+3){
-	write("hola");
-	break;	
-}
+

@@ -1,0 +1,23 @@
+// Generated from S001HelloWord.g4 by ANTLR 4.4
+
+package analizadorlex;
+
+import org.antlr.v4.runtime.misc.NotNull;
+import org.antlr.v4.runtime.tree.ParseTreeListener;
+
+/**
+ * This interface defines a complete listener for a parse tree produced by
+ * {@link S001HelloWordParser}.
+ */
+public interface S001HelloWordListener extends ParseTreeListener {
+	/**
+	 * Enter a parse tree produced by {@link S001HelloWordParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterExpression(@NotNull S001HelloWordParser.ExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link S001HelloWordParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitExpression(@NotNull S001HelloWordParser.ExpressionContext ctx);
+}

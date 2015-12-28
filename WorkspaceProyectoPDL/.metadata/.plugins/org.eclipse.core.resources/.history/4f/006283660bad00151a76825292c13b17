@@ -1,0 +1,86 @@
+P -> B Z P | F Z P | Z P | eof.
+Z -> cr Z'.
+Z' -> Z | oc.
+B -> var T id | if ( E ) S | S | for ( S ; E ; E ) Z { Z C }.
+S -> id S' | return X | write ( E ) | prompt ( id ).
+S' -> = E | %= E | ( L ).
+T -> int | boolean | char.
+X -> E | LAMBDA.
+L -> E Q | LAMBDA.
+Q -> , E Q | .
+F -> function H id ( A )  Z { Z C }.
+H -> T | LAMBDA.
+A -> T id K | LAMBDA.
+K -> , T id K | LAMBDA.
+C -> B Z C | break | LAMBDA.
+E -> U E'.
+E' -> && U E' | LAMBDA.
+U -> V U'.
+U' -> + V U' | LAMBDA.
+V -> id V' | ( E ) | entero | cadena.
+V' -> ( L ) | LAMBDA.
+
+First(P) = { eof, cr, var, id, if, for, return, write, prompt, function }
+Follow(P) = { $ }
+
+First(Z) = { cr }
+Follow(Z) = { eof, cr, var, id, if, for, {, }, return, write, prompt, function, break }
+
+First(Z') = { cr, oc }
+Follow(Z') = { eof, cr, var, id, if, for, {, }, return, write, prompt, function, break }
+
+First(B) = { var, id, if, for, return, write, prompt }
+Follow(B) = { cr }
+
+First(S) = { id, return, write, prompt }
+Follow(S) = { cr, ; }
+
+First(S') = { (, =, %= }
+Follow(S') = { cr, ; }
+
+First(T) = { int, boolean, char }
+Follow(T) = { id }
+
+First(X) = { id, (, entero, cadena }
+Follow(X) = { cr, ; }
+
+First(L) = { id, (, entero, cadena }
+Follow(L) = { ) }
+
+First(Q) = { , }
+Follow(Q) = { ) }
+
+First(F) = { function }
+Follow(F) = { cr }
+
+First(H) = { int, boolean, char }
+Follow(H) = { id }
+
+First(A) = { int, boolean, char }
+Follow(A) = { id }
+
+First(K) = { , }
+Follow(K) = { ) }
+
+First(C) = { var, id, if, for, return, write, prompt, break, λ }
+Follow(C) = { } }
+
+First(E) = { id, (, entero, cadena }
+Follow(E) = { cr, ), ;, , }
+
+First(E') = { &&, λ }
+Follow(E') = { cr, ), ;, , }
+
+First(U) = { id, (, entero, cadena }
+Follow(U) = { cr, ), ;, ,, && }
+
+First(U') = { +, λ }
+Follow(U') = { cr, ), ;, ,, && }
+
+First(V) = { id, (, entero, cadena }
+Follow(V) = { cr, ), ;, ,, &&, + }
+
+First(V') = { (, λ }
+Follow(V') = { cr, ), ;, ,, &&, + }
+
+http://mdaines.github.io/grammophone/#/ll1-table

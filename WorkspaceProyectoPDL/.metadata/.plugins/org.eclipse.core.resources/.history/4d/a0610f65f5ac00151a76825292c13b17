@@ -1,0 +1,140 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package analizadorlex;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+/**
+ *
+ * @author arturo
+ */
+public class Main {
+
+	/**
+	 * Muestra un menu para elegir la opcion
+	 * mas conveniente
+	 * @param args the command line arguments
+	 */
+	static Yytoken tokenActual = null;
+	static AnalizadorLexico a = null;
+	public static void main(String[] args) {
+		int opcion = 0;
+
+		java.util.Scanner in = new java.util.Scanner(System.in);
+
+		System.out.println("Seleccione una opción:");
+		System.out.println("1) Generar Analizador Léxico a partir de alexico.flex");
+		System.out.println("2) Ejecutar archivo entrada.txt");
+		System.out.print("Opcion: ");
+		opcion = in.nextInt();
+		switch (opcion) {
+		case 1: {
+			System.out.println("\n*** Generando ***\n");
+			System.out.println("\n*** Procesando archivo alexico.flex ***\n");
+			String archLex = "alexico.flex";
+			String[] entrada = {archLex};
+			jflex.Main.main(entrada);
+			//Movemos el archivo generado al directorio src
+			File arch = new File("AnalizadorLexico.java");
+			if(arch.exists()){
+				System.out.println("" + arch);
+				Path currentRelativePath = Paths.get("");
+				String nuevoDir = currentRelativePath.toAbsolutePath().toString()
+						+ File.separator + "src" + File.separator 
+						+ "analizadorlex" + File.separator+arch.getName();
+				File archViejo = new File(nuevoDir);
+				archViejo.delete();
+				if(arch.renameTo(new File(nuevoDir))){
+					System.out.println("\n*** Generado ***\n");
+					System.out.println("\n*** Saliendo automaticamente ***\n");
+					System.exit(0);
+				}else{
+					System.out.println("\n*** No generado ***\n");
+				}
+			}else{
+				System.out.println("\n*** Codigo no existente ***\n");
+			}
+			break;
+		}
+		case 2: {
+			String entrada = "";
+			System.out.println("\n*** Ejecutando ***\n");
+			System.out.println("\n*** Procesando archivo entrada.txt ***\n");
+			entrada = "entrada.txt";
+			BufferedReader bf = null;
+			try {
+				bf = new BufferedReader(new FileReader(entrada));
+				a = new AnalizadorLexico(bf);
+				tokenActual = a.sigToken(); //Primer token
+				P();
+//				do {//Todo el código
+//					token = a.sigToken();
+//					System.out.println(token.toString());
+//				} while (token != null);
+			} catch (Exception ex) {
+				Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+			} finally {
+				try {
+					bf.close();
+				} catch (IOException ex) {
+					Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+				}
+			}
+			System.out.println("\n*** Ejecucion finalizada ***\n");
+			break;
+		}
+		default: {
+			System.out.println("Opcion no valida.");
+			break;
+		}
+		}
+
+	}
+	public static void P(){
+		System.out.println("Estoy en P");
+		System.out.println(tokenActual);
+		try{
+			tokenActual=a.sigToken();
+			System.out.println(tokenActual);
+		}catch (Exception ex) {
+		}
+		Z();
+	}
+	public static void Z(){
+		System.out.println("Estoy en Z");
+		try{
+			tokenActual=a.sigToken();
+			System.out.println(tokenActual);
+		}catch (Exception ex) {
+		}
+		Zp();
+	}
+	public static void Zp(){
+		System.out.println("Estoy en Zp");
+		try{
+			tokenActual=a.sigToken();
+			System.out.println(tokenActual);
+		}catch (Exception ex) {
+		}
+	}
+	public static void comprobarToken(String token){
+		if(tokenActual.token.equals(token)){
+			try{
+				tokenActual=a.sigToken();
+			}catch (Exception ex) {
+			}
+		}else
+			System.err.println("Para el carro, token inválido en comprobarToken");
+	}
+
+}

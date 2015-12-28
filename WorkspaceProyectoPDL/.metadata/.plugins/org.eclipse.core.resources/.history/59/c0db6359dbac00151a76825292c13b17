@@ -1,0 +1,16 @@
+P -> B Z P | F Z P | Z P | eof
+Z -> cr Z | cr | LAMBDA
+B -> var T id | if ( E ) S | S | for ( S ; E ; E ) { Z C }
+S -> id = E | id %= E | return X | id ( L ) | write ( E ) | prompt ( id )
+T -> int | boolean | char
+X -> E | LAMBDA
+L -> E Q | LAMBDA
+Q -> , E Q | LAMBDA
+F -> function H id ( A )  Z { Z C }
+H -> T | LAMBDA
+A -> T id K | LAMBDA
+K -> , T id K | LAMBDA
+C -> B Z C | LAMBDA | break
+E -> E && U | U
+U -> U + V | V
+V -> id | ( E ) | entero | cadena | id ( L )

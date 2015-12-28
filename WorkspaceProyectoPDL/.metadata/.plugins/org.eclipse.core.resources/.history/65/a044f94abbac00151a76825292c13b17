@@ -1,0 +1,17 @@
+package AnalizLex;
+
+import org.antlr.v4.runtime.*;
+import org.antlr.v4.runtime.tree.*;
+
+public class PruebaAnalLex {
+  public static void main( String[] args) throws Exception 
+  {
+    AnalizLexLexer lexer = new AnalizLexLexer( new ANTLRFileStream(args[0]));
+    CommonTokenStream tokens = new CommonTokenStream( lexer );
+    System.out.println(tokens.get(-1).toString());
+    AnalizLexParser parser = new AnalizLexParser( tokens );
+    ParseTree tree = parser.r();
+    ParseTreeWalker walker = new ParseTreeWalker();
+//    walker.walk( new AnalizLexWalker(), tree );
+  }
+}
