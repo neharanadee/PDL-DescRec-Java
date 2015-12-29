@@ -20,7 +20,7 @@ R -> U R'.
 R' -> == U R' | LAMBDA.
 U -> V U'.
 U' -> + V U' | LAMBDA.
-V -> id V' | ( E ) | num | cadena | true | false.
+V -> id V' | ( E ) | num | cadena.
 V' -> ( L ) | LAMBDA.
 
 First(P) = { eof, var, if, for, id, return, write, prompt, cr, function }
@@ -47,10 +47,10 @@ Follow(S') = { ;, cr }
 First(T) = { int, boolean, char }
 Follow(T) = { id }
 
-First(X) = { λ, id, (, num, cadena, true, false }
+First(X) = { λ, id, (, num, cadena }
 Follow(X) = { ;, cr }
 
-First(L) = { λ, id, (, num, cadena, true, false }
+First(L) = { λ, id, (, num, cadena }
 Follow(L) = { ) }
 
 First(Q) = { ,, λ }
@@ -71,25 +71,25 @@ Follow(K) = { ) }
 First(C) = { break, λ, var, if, for, id, return, write, prompt }
 Follow(C) = { } }
 
-First(E) = { id, (, num, cadena, true, false }
+First(E) = { id, (, num, cadena }
 Follow(E) = { ), ,, =, ;, cr }
 
 First(E') = { &&, λ }
 Follow(E') = { ), ,, =, ;, cr }
 
-First(R) = { id, (, num, cadena, true, false }
+First(R) = { id, (, num, cadena }
 Follow(R) = { &&, ), ,, =, ;, cr }
 
 First(R') = { ==, λ }
 Follow(R') = { &&, ), ,, =, ;, cr }
 
-First(U) = { id, (, num, cadena, true, false }
+First(U) = { id, (, num, cadena }
 Follow(U) = { ==, &&, ), ,, =, ;, cr }
 
 First(U') = { +, λ }
 Follow(U') = { ==, &&, ), ,, =, ;, cr }
 
-First(V) = { id, (, num, cadena, true, false }
+First(V) = { id, (, num, cadena }
 Follow(V) = { +, ==, &&, ), ,, =, ;, cr }
 
 First(V') = { (, λ }

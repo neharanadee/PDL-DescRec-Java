@@ -10,8 +10,27 @@ function int FactorialRecursivo (int n)	/* n: parámetro formal de la función ent
 	return n + FactorialRecursivo (n + 1)	/* llamada recursiva */
 }
 
-var boolean hola = false;
+boolean hola = false;
 
+function int FactorialDo (int n)
+{
+	var int factorial = 1	/* variable local inicializada a uno*/
+	do
+	{
+		factorial %= n+1	/* equivale a: factorial = factorial * n; n = n - 1;*/
+	} while (n)		/* mientras n no sea 0*/
+	return factorial	/* devuelve el valor entero de la variable factorial*/
+}
+
+function int FactorialWhile ()
+{
+	var int factorial = 1, i	/* variables locales: factorial inicializada a 1 e i inicializada a 0 por omisión*/
+	while (i == num)			/* num es variable global entera sin declarar*/
+	{
+		factorial %= i+1	/* equivale a: i = i + 1; factorial = factorial * i;*/
+	}
+	return factorial
+}
 
 function int FactorialFor (int n)
 {

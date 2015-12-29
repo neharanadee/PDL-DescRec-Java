@@ -195,12 +195,11 @@ public class Main {
 			//Otro carácter
 		}
 	}
-	public static void B(){//B -> var T id W | if ( E ) S | S | for ( S ; E ; E ) Z { Z C }.
+	public static void B(){//B -> var T id | if ( E ) S | S | for ( S ; E ; E ) Z { Z C }.
 		if(tokenActual.token.equals("var")){//First(varTid) = var
 			compToken("var");
 			T();
 			compToken("Id");
-			W();
 
 		}else if(tokenActual.token.equals("if")){// First(if(E)S) = if
 			compToken("if");
@@ -230,23 +229,6 @@ public class Main {
 
 		}else
 			throw new RuntimeException("Error en B, no se ha aceptado ningún token");
-	}	
-	public static void W(){//W -> , id W | = E W | LAMBDA.
-		if(tokenActual.token.equals(",")){//First(,idW) = ,
-			compToken(",");
-			compToken("Id");
-			W();
-
-		}else if(tokenActual.token.equals("=")){// First(=EW) = =
-			compToken("=");
-			E();
-			W();
-
-		}else if(tokenActual.tipo.equals("eol")){// Follow(W) = cr
-			// Nothing
-
-		}else
-			throw new RuntimeException("Error en W, no se ha aceptado ningún token");
 	}
 	public static void S(){//S -> id S' | return X | write ( E ) | prompt ( id ).
 		if(tokenActual.tipo.equals("Id")){//First(idS') = id
@@ -304,9 +286,7 @@ public class Main {
 	public static void X(){//X -> E | LAMBDA.
 		if(tokenActual.tipo.equals("Id")||tokenActual.token.equals("(")
 				|| tokenActual.tipo.equals("Num")
-				|| tokenActual.tipo.equals("Cadena")
-				|| tokenActual.token.equals("true")
-				|| tokenActual.token.equals("false")){//First(E) = id, (, entero, cadena, true, false
+				|| tokenActual.tipo.equals("Cadena")){//First(E) = id, (, entero, cadena
 			E();
 
 		}else if(tokenActual.tipo.equals("eol")||tokenActual.token.equals(")")
@@ -320,9 +300,7 @@ public class Main {
 	public static void L(){//L -> E Q | LAMBDA.
 		if(tokenActual.tipo.equals("Id")||tokenActual.token.equals("(")
 				|| tokenActual.tipo.equals("Num")
-				|| tokenActual.tipo.equals("Cadena")
-				|| tokenActual.token.equals("true")
-				|| tokenActual.token.equals("false")){//First(EQ) = id, (, entero, cadena, true, false
+				|| tokenActual.tipo.equals("Cadena")){//First(EQ) = id, (, entero, cadena
 			E();
 			Q();
 
@@ -413,25 +391,22 @@ public class Main {
 	public static void E(){//E -> R E'.
 		if(tokenActual.tipo.equals("Id")||tokenActual.token.equals("(")
 				|| tokenActual.tipo.equals("Num")
-				|| tokenActual.tipo.equals("Cadena")
-				|| tokenActual.token.equals("true")
-				|| tokenActual.token.equals("false")){//First(RE') = id, (, entero, cadena, true, false
+				|| tokenActual.tipo.equals("Cadena")){//First(RE') = id, (, entero, cadena
 			R();
 			Ep();
 
 		}else
 			throw new RuntimeException("Error en E, no se ha aceptado ningún token");
 	}
-	public static void Ep(){//E' -> && R E' | LAMBDA.
-		if(tokenActual.token.equals("&&")){//First(&&REp) = &&
+	public static void Ep(){//E' -> && R E' | LAMBDA..
+		if(tokenActual.token.equals("&&")){//First(&&UEp) = &&
 			compToken("&&");
 			R();
 			Ep();
 
 		}else if(tokenActual.token.equals(")")||tokenActual.token.equals(",")
-				|| tokenActual.token.equals("=")
 				|| tokenActual.token.equals(";")
-				|| tokenActual.tipo.equals("eol")){// Follow(Ep) = ), ,, =, ;, cr
+				|| tokenActual.tipo.equals("eol")){// Follow(Ep) = ), ,, ;, cr
 			// Nothing
 		}else
 			throw new RuntimeException("Error en Ep, no se ha aceptado ningún token");
@@ -439,9 +414,7 @@ public class Main {
 	public static void R(){//R -> U R'.
 		if(tokenActual.tipo.equals("Id")||tokenActual.token.equals("(")
 				|| tokenActual.tipo.equals("Num")
-				|| tokenActual.tipo.equals("Cadena")
-				|| tokenActual.token.equals("true")
-				|| tokenActual.token.equals("false")){//First(UR') = id, (, entero, cadena, true, false
+				|| tokenActual.tipo.equals("Cadena")){//First(UR') = id, (, entero, cadena
 			U();
 			Rp();
 
@@ -456,9 +429,8 @@ public class Main {
 
 		}else if(tokenActual.token.equals("&&")||tokenActual.token.equals(")")
 				||tokenActual.token.equals(",")
-				|| tokenActual.token.equals("=")
 				|| tokenActual.token.equals(";")
-				|| tokenActual.tipo.equals("eol")){// Follow(Rp) = &&, ), ,, =, ;, cr
+				|| tokenActual.tipo.equals("eol")){// Follow(Rp) = &&, ), ,, ;, cr
 			// Nothing
 		}else
 			throw new RuntimeException("Error en Rp, no se ha aceptado ningún token");
@@ -466,9 +438,7 @@ public class Main {
 	public static void U(){//U -> V U'.
 		if(tokenActual.tipo.equals("Id")||tokenActual.token.equals("(")
 				|| tokenActual.tipo.equals("Num")
-				|| tokenActual.tipo.equals("Cadena")
-				|| tokenActual.token.equals("true")
-				|| tokenActual.token.equals("false")){//First(VU') = id, (, entero, cadena, true, false
+				|| tokenActual.tipo.equals("Cadena")){//First(VU') = id, (, entero, cadena
 			V();
 			Up();
 
@@ -484,14 +454,13 @@ public class Main {
 		}else if(tokenActual.token.equals("==")||tokenActual.token.equals("&&")
 				||tokenActual.token.equals(")")
 				|| tokenActual.token.equals(",")
-				|| tokenActual.token.equals("=")
 				|| tokenActual.token.equals(";")
-				|| tokenActual.tipo.equals("eol")){// Follow(Up) = ==,&&, ), ,, =, ;, cr
+				|| tokenActual.tipo.equals("eol")){// Follow(Up) = ==,&&, ), ,, ;, cr
 			// Nothing
 		}else
 			throw new RuntimeException("Error en Up, no se ha aceptado ningún token");
 	}
-	public static void V(){//V -> id V' | ( E ) | entero | cadena | true | false.
+	public static void V(){//V -> id V' | ( E ) | entero | cadena.
 		if(tokenActual.tipo.equals("Id")){//First(idV') = id
 			compToken("Id");
 			Vp();
@@ -507,12 +476,6 @@ public class Main {
 		}else if(tokenActual.tipo.equals("Cadena")){//First(cadena) = cadena
 			compToken("Cadena");
 
-		}else if(tokenActual.token.equals("true")){//First(true) = true
-			compToken("true");
-
-		}else if(tokenActual.token.equals("false")){//First(false) = false
-			compToken("false");
-
 		}else
 			throw new RuntimeException("Error en V, no se ha aceptado ningún token");
 	}
@@ -526,9 +489,8 @@ public class Main {
 				|| tokenActual.token.equals("&&")
 				||tokenActual.token.equals(")")
 				|| tokenActual.token.equals(",")
-				|| tokenActual.token.equals("=")
 				|| tokenActual.token.equals(";")
-				|| tokenActual.tipo.equals("eol")){// Follow(Vp) = +, ==, &&, ), ,, =, ;, cr
+				|| tokenActual.tipo.equals("eol")){// Follow(Vp) = +, ==, &&, ), ,, ;, cr
 			// Nothing
 		}else
 			throw new RuntimeException("Error en Vp, no se ha aceptado ningún token");
