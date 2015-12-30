@@ -10,7 +10,7 @@ function int FactorialRecursivo (int n)	/* n: parámetro formal de la función ent
 	return n + FactorialRecursivo (n + 1)	/* llamada recursiva */
 }
 
-var boolean hola = false;
+var boolean hola = false
 
 
 function int FactorialFor (int n)

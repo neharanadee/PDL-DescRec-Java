@@ -11,6 +11,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -19,6 +20,61 @@ import java.util.logging.Logger;
  * @author Sergio Chica
  */
 public class Main {
+	
+	public class Entrada{
+		private int posicion;
+		private String ident;
+		private String tipo;
+		private int despl;
+		private String param;
+		
+		public Entrada(int posicion, String ident, String tipo, int despl,
+				String param) {
+			super();
+			this.posicion = posicion;
+			this.ident = ident;
+			this.tipo = tipo;
+			this.despl = despl;
+			this.param = param;
+		}
+
+		public int getPosicion() {
+			return posicion;
+		}
+
+		public String getIdent() {
+			return ident;
+		}
+
+
+		public String getTipo() {
+			return tipo;
+		}
+
+		public int getDespl() {
+			return despl;
+		}
+
+		public String getParam() {
+			return param;
+		}
+
+
+		@Override
+		public String toString() {
+			return "Entrada [posicion=" + posicion + ", ident=" + ident
+					+ ", tipo=" + tipo + ", despl=" + despl + ", param="
+					+ param + "]";
+		}
+		
+		
+	}
+	public class TablaSimbolos{
+		ArrayList<Entrada> tabla;
+		public TablaSimbolos(){
+			tabla = new ArrayList<Entrada>();
+		}
+	}
 
 	/**
 	 * Muestra un menu para elegir la opcion
