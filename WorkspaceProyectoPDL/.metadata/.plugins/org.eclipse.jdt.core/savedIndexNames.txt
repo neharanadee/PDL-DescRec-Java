@@ -6,7 +6,6 @@ INDEX VERSION 1.127+C:\Users\S\Desktop\ProcesadoresDeLenguajes\WorkspaceProyecto
 3882240654.index
 3152152696.index
 2339264475.index
-3397366359.index
 2477091700.index
 1885630538.index
 3616180831.index

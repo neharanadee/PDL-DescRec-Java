@@ -3,4 +3,7 @@
 <fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="analizadorlex.Main.TablaSimbolos"/>
+<fullyQualifiedTypeName name="analizadorlex.TipoVaribleNoDefinido"/>
+<fullyQualifiedTypeName name="java.lang.Exception"/>
+<fullyQualifiedTypeName name="java.lang.System"/>
 </qualifiedTypeNameHistroy>

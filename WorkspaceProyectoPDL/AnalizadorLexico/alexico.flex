@@ -72,7 +72,6 @@ class Yytoken {
 	    Yytoken t = new Yytoken(contador,"","eof",yyline,yycolumn);
 	    tokens.add(t);
 		this.escribirEnFichero();
-        System.exit(0);
 	}catch(IOException ioe){
 		ioe.printStackTrace();
 	}
