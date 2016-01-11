@@ -20,14 +20,14 @@ import java.util.logging.Logger;
  * @author Sergio Chica
  */
 public class Main {
-	
+
 	public class Entrada{
 		private int posicion;
 		private String ident;
 		private String tipo;
 		private int despl;
 		private String param;
-		
+
 		public Entrada(int posicion, String ident, String tipo, int despl,
 				String param) {
 			super();
@@ -66,8 +66,8 @@ public class Main {
 					+ ", tipo=" + tipo + ", despl=" + despl + ", param="
 					+ param + "]";
 		}
-		
-		
+
+
 	}
 	public class TablaSimbolos{
 		ArrayList<Entrada> tabla;
@@ -83,6 +83,7 @@ public class Main {
 	 */
 	static Yytoken tokenActual = null;
 	static AnalizadorLexico a = null;
+
 	public static void main(String[] args) {
 		int opcion = 0;
 
@@ -138,16 +139,16 @@ public class Main {
 				//					System.out.println(token.toString());
 				//				} while (token != null);
 			} catch (Exception ex) {
-				System.err.println("El token que no se encontró es: "+tokenActual+"\n\n");
-				Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+				System.err.println(ex);
+				System.err.println("El token que no se encontró es: "+tokenActual+" línea "+linea()+"\n\n");//luego se quita
+				//Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
 			} finally {
 				try {
 					bf.close();
 				} catch (IOException ex) {
-					Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+					//Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
 				}
 			}
-			System.out.println("\n*** Ejecucion finalizada ***\n");
 			break;
 		}
 		default: {
@@ -210,9 +211,9 @@ public class Main {
 	}
 
 	public static void P(){//P -> B Z P | F Z P | Z P | eof.
-		if(tokenActual.token.equals("var") || tokenActual.tipo.equals("Id") || tokenActual.token.equals("if") || 
-				tokenActual.token.equals("for") || tokenActual.token.equals("return") || tokenActual.token.equals("write")
-				|| tokenActual.token.equals("prompt")){//First(BZP) = var, id, if, for, return, write, prompt
+		if(tokenActual.token.equals("var") || tokenActual.token.equals("if") || tokenActual.token.equals("for") || 
+				tokenActual.tipo.equals("Id") || tokenActual.token.equals("return") || tokenActual.token.equals("write")
+				|| tokenActual.token.equals("prompt")){//First(BZP) = var, if, for, id, return, write, prompt
 			B();
 			Z();
 			P();
@@ -226,7 +227,7 @@ public class Main {
 			Z();
 			P();
 
-		}else if (tokenActual.tipo.equals("eof")){//First(eof)
+		}else if (tokenActual.tipo.equals("eof")){//First(eof) = eof
 			compToken("eof");
 
 		}else {
@@ -251,10 +252,15 @@ public class Main {
 			//Otro carácter
 		}
 	}
-	public static void B(){//B -> var T id W | if ( E ) S | S | for ( S ; E ; E ) Z { Z C }.
-		if(tokenActual.token.equals("var")){//First(varTid) = var
+	public static void B(){//B -> var T id W | if ( E ) S | S | for ( S ; E ; S ) Z { Z C }.
+		if(tokenActual.token.equals("var")){//First(varTidW) = var
 			compToken("var");
-			T();
+			try{
+				T();
+			}catch(Exception ex){
+				System.err.println(ex);
+				System.exit(1);
+			}
 			compToken("Id");
 			W();
 
@@ -269,14 +275,14 @@ public class Main {
 				|| tokenActual.token.equals("write")
 				|| tokenActual.token.equals("prompt")){//First(S)= id, return, write, prompt
 			S();
-		}else if(tokenActual.token.equals("for")){//First(for(S;E;E)Z{ZC}) = for
+		}else if(tokenActual.token.equals("for")){//First(for(S;E;S)Z{ZC}) = for
 			compToken("for");
 			compToken("(");
 			S();
 			compToken(";");
 			E();
 			compToken(";");
-			E();
+			S();
 			compToken(")");
 			Z();
 			compToken("{");
@@ -300,7 +306,7 @@ public class Main {
 
 		}else if(tokenActual.tipo.equals("eol")){// Follow(W) = cr
 			// Nothing
-
+			
 		}else
 			throw new RuntimeException("Error en W, no se ha aceptado ningún token");
 	}
@@ -329,7 +335,7 @@ public class Main {
 			throw new RuntimeException("Error en S, no se ha aceptado ningún token");
 	}
 	public static void Sp(){//S' -> = E | %= E | ( L ).
-		if(tokenActual.tipo.equals("=")){//First(=E) = =
+		if(tokenActual.token.equals("=")){//First(=E) = =
 			compToken("=");
 			E();
 
@@ -344,7 +350,7 @@ public class Main {
 		}else
 			throw new RuntimeException("Error en Sp, no se ha aceptado ningún token");
 	}
-	public static void T(){//T -> int | boolean | char.
+	public static void T() /*throws TipoVaribleNoDefinido*/{//T -> int | boolean | char.
 		if(tokenActual.token.equals("int")){//First(int) = int
 			compToken("int");
 
@@ -354,20 +360,25 @@ public class Main {
 		}else if(tokenActual.token.equals("char")){// First(char) = char
 			compToken("char");
 
-		}else
+		}else{
+			//System.err.print("Línea "+tokenActual.linea+", ");
+			//throw new TipoVaribleNoDefinido("Se debe definir un tipo de variable en la declaración");
 			throw new RuntimeException("Error en T, no se ha aceptado ningún token");
+		}
+		
 	}
 	public static void X(){//X -> E | LAMBDA.
-		if(tokenActual.tipo.equals("Id")||tokenActual.token.equals("(")
+		if(tokenActual.tipo.equals("Id") || tokenActual.token.equals("(")
 				|| tokenActual.tipo.equals("Num")
 				|| tokenActual.tipo.equals("Cadena")
 				|| tokenActual.token.equals("true")
-				|| tokenActual.token.equals("false")){//First(E) = id, (, entero, cadena, true, false
+				|| tokenActual.token.equals("false")){//First(E) = id, (, num, cadena, true, false
 			E();
 
-		}else if(tokenActual.tipo.equals("eol")||tokenActual.token.equals(")")
+		}else if(tokenActual.token.equals(")") || tokenActual.token.equals(",")
+				|| tokenActual.token.equals("=")
 				|| tokenActual.token.equals(";")
-				|| tokenActual.token.equals(",")){// Follow(E) = cr, ), ;, , 
+				|| tokenActual.tipo.equals("eol")){// Follow(E) = ), ,, =, ;, cr
 			// Nothing
 
 		}else
@@ -378,7 +389,7 @@ public class Main {
 				|| tokenActual.tipo.equals("Num")
 				|| tokenActual.tipo.equals("Cadena")
 				|| tokenActual.token.equals("true")
-				|| tokenActual.token.equals("false")){//First(EQ) = id, (, entero, cadena, true, false
+				|| tokenActual.token.equals("false")){//First(EQ) = id, (, num, cadena, true, false
 			E();
 			Q();
 
@@ -396,6 +407,7 @@ public class Main {
 
 		}else if(tokenActual.token.equals(")")){// Follow(Q) = )
 			// Nothing
+			
 		}else
 			throw new RuntimeException("Error en Q, no se ha aceptado ningún token");
 	}
@@ -419,40 +431,58 @@ public class Main {
 	public static void H(){//H -> T | LAMBDA.
 		if(tokenActual.token.equals("int") || tokenActual.token.equals("boolean")
 				|| tokenActual.token.equals("char")){//First(T) = int, boolean, char
-			T();
+			//try{
+				T();
+			//}catch(Exception ex){
+				//System.err.println(ex);
+				//System.exit(1);
+			//}
 
 		}else if(tokenActual.tipo.equals("Id")){// Follow(H) = id
 			// Nothing
+			
 		}else
 			throw new RuntimeException("Error en H, no se ha aceptado ningún token");
 	}
 	public static void A(){//A -> T id K | LAMBDA.
 		if(tokenActual.token.equals("int") || tokenActual.token.equals("boolean")
 				|| tokenActual.token.equals("char")){//First(TidK) = int, boolean, char
-			T();
+			//try{
+				T();
+			//}catch(Exception ex){
+			//	System.err.println(ex);
+			//	System.exit(1);
+			//}
 			compToken("Id");
 			K();
 
 		}else if(tokenActual.token.equals(")")){// Follow(A) = )
 			// Nothing
+			
 		}else
 			throw new RuntimeException("Error en A, no se ha aceptado ningún token");
 	}
 	public static void K(){//K -> , T id K | LAMBDA.
 		if(tokenActual.token.equals(",")){//First(,TidK) = ,
 			compToken(",");
-			T();
+			//try{
+				T();
+			//}catch(Exception ex){
+			//	System.err.println(ex);
+			//	System.exit(1);
+			//}
 			compToken("Id");
 			K();
 
 		}else if(tokenActual.token.equals(")")){// Follow(K) = )
 			// Nothing
+			
 		}else
 			throw new RuntimeException("Error en K, no se ha aceptado ningún token");
 	}
 	public static void C(){//C -> B Z C | break | LAMBDA.
-		if(tokenActual.token.equals("var") || tokenActual.tipo.equals("Id") || tokenActual.token.equals("if") || 
-				tokenActual.token.equals("for") || tokenActual.token.equals("return") || tokenActual.token.equals("write")
+		if(tokenActual.token.equals("var") || tokenActual.token.equals("if") || tokenActual.token.equals("for") || 
+				tokenActual.tipo.equals("Id") || tokenActual.token.equals("return") || tokenActual.token.equals("write")
 				|| tokenActual.token.equals("prompt")){//First(BZC) = var, if, for, id, return, write, prompt
 			B();
 			Z();
@@ -463,25 +493,26 @@ public class Main {
 
 		}else if(tokenActual.token.equals("}")){// Follow(C) = }
 			// Nothing
+			
 		}else
 			throw new RuntimeException("Error en C, no se ha aceptado ningún token");
 	}
-	public static void E(){//E -> R E'.
+	public static void E(){//E -> G E'.
 		if(tokenActual.tipo.equals("Id")||tokenActual.token.equals("(")
 				|| tokenActual.tipo.equals("Num")
 				|| tokenActual.tipo.equals("Cadena")
 				|| tokenActual.token.equals("true")
-				|| tokenActual.token.equals("false")){//First(RE') = id, (, entero, cadena, true, false
-			R();
+				|| tokenActual.token.equals("false")){//First(GE') = id, (, num, cadena, true, false
+			G();
 			Ep();
 
 		}else
 			throw new RuntimeException("Error en E, no se ha aceptado ningún token");
 	}
-	public static void Ep(){//E' -> && R E' | LAMBDA.
-		if(tokenActual.token.equals("&&")){//First(&&REp) = &&
-			compToken("&&");
-			R();
+	public static void Ep(){//E' -> %= G E' | LAMBDA.
+		if(tokenActual.token.equals("%=")){//First(%=GEp) = %=
+			compToken("%=");
+			G();
 			Ep();
 
 		}else if(tokenActual.token.equals(")")||tokenActual.token.equals(",")
@@ -492,12 +523,38 @@ public class Main {
 		}else
 			throw new RuntimeException("Error en Ep, no se ha aceptado ningún token");
 	}
+	public static void G(){//G -> R G'.
+		if(tokenActual.tipo.equals("Id")||tokenActual.token.equals("(")
+				|| tokenActual.tipo.equals("Num")
+				|| tokenActual.tipo.equals("Cadena")
+				|| tokenActual.token.equals("true")
+				|| tokenActual.token.equals("false")){//First(GE') = id, (, num, cadena, true, false
+			R();
+			Gp();
+
+		}else
+			throw new RuntimeException("Error en G, no se ha aceptado ningún token");
+	}
+	public static void Gp(){//G' -> && R G' | LAMBDA.
+		if(tokenActual.token.equals("&&")){//First(&&RGp) = &&
+			compToken("&&");
+			R();
+			Gp();
+
+		}else if(tokenActual.token.equals("%=")||tokenActual.token.equals(")")||tokenActual.token.equals(",")
+				|| tokenActual.token.equals("=")
+				|| tokenActual.token.equals(";")
+				|| tokenActual.tipo.equals("eol")){// Follow(Gp) = %=, ), ,, =, ;, cr
+			// Nothing
+		}else
+			throw new RuntimeException("Error en Gp, no se ha aceptado ningún token");
+	}
 	public static void R(){//R -> U R'.
 		if(tokenActual.tipo.equals("Id")||tokenActual.token.equals("(")
 				|| tokenActual.tipo.equals("Num")
 				|| tokenActual.tipo.equals("Cadena")
 				|| tokenActual.token.equals("true")
-				|| tokenActual.token.equals("false")){//First(UR') = id, (, entero, cadena, true, false
+				|| tokenActual.token.equals("false")){//First(UR') = id, (, num, cadena, true, false
 			U();
 			Rp();
 
@@ -510,12 +567,13 @@ public class Main {
 			U();
 			Rp();
 
-		}else if(tokenActual.token.equals("&&")||tokenActual.token.equals(")")
+		}else if(tokenActual.token.equals("&&")||tokenActual.token.equals("%=")||tokenActual.token.equals(")")
 				||tokenActual.token.equals(",")
 				|| tokenActual.token.equals("=")
 				|| tokenActual.token.equals(";")
-				|| tokenActual.tipo.equals("eol")){// Follow(Rp) = &&, ), ,, =, ;, cr
+				|| tokenActual.tipo.equals("eol")){// Follow(Rp) = &&, %=, ), ,, =, ;, cr
 			// Nothing
+			
 		}else
 			throw new RuntimeException("Error en Rp, no se ha aceptado ningún token");
 	}
@@ -524,7 +582,7 @@ public class Main {
 				|| tokenActual.tipo.equals("Num")
 				|| tokenActual.tipo.equals("Cadena")
 				|| tokenActual.token.equals("true")
-				|| tokenActual.token.equals("false")){//First(VU') = id, (, entero, cadena, true, false
+				|| tokenActual.token.equals("false")){//First(VU') = id, (, num, cadena, true, false
 			V();
 			Up();
 
@@ -537,13 +595,14 @@ public class Main {
 			V();
 			Up();
 
-		}else if(tokenActual.token.equals("==")||tokenActual.token.equals("&&")
+		}else if(tokenActual.token.equals("==")||tokenActual.token.equals("&&")||tokenActual.token.equals("%=")
 				||tokenActual.token.equals(")")
 				|| tokenActual.token.equals(",")
 				|| tokenActual.token.equals("=")
 				|| tokenActual.token.equals(";")
-				|| tokenActual.tipo.equals("eol")){// Follow(Up) = ==,&&, ), ,, =, ;, cr
+				|| tokenActual.tipo.equals("eol")){// Follow(Up) = ==, &&, %=, ), ,, =, ;, cr
 			// Nothing
+			
 		}else
 			throw new RuntimeException("Error en Up, no se ha aceptado ningún token");
 	}
@@ -580,14 +639,19 @@ public class Main {
 
 		}else if(tokenActual.token.equals("+")||tokenActual.token.equals("==")
 				|| tokenActual.token.equals("&&")
+				|| tokenActual.token.equals("%=")
 				||tokenActual.token.equals(")")
 				|| tokenActual.token.equals(",")
 				|| tokenActual.token.equals("=")
 				|| tokenActual.token.equals(";")
-				|| tokenActual.tipo.equals("eol")){// Follow(Vp) = +, ==, &&, ), ,, =, ;, cr
+				|| tokenActual.tipo.equals("eol")){// Follow(Vp) = +, ==, &&, %=, ), ,, =, ;, cr
 			// Nothing
 		}else
 			throw new RuntimeException("Error en Vp, no se ha aceptado ningún token");
+	}
+	
+	public static int linea(){
+		return tokenActual.linea+1;
 	}
 
 

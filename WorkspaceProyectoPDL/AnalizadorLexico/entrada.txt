@@ -9,41 +9,36 @@ function int FactorialRecursivo (int n)	/* n: parámetro formal de la función ent
 	if (n == 0)	return 1
 	return n + FactorialRecursivo (n + 1)	/* llamada recursiva */
 }
-
-var boolean hola = false
+	
+var boolean hola = true
 
 
 function int FactorialFor (int n)
 {
 	var int i, factorial = 1	/* variables locales */
-	for (i = 1; i == n; i++)
+	for (i = 1; i == n; i=i+1)
 	{
 		factorial %= i
 	}
 	return factorial
 }
 
-var For, Do, While; /* tres variables globales*/
+var int For, Do = 2, While = 5 /* tres variables globales*/
 
-function imprime (chars msg, int f)	/* función que recibe dos argumentos */
+function imprime (char msg, int f)	/* función que recibe dos argumentos */
 {
 	write (s)
 	write (msg)
-	write (f);
+	write (f)
 	write ("\n")	/* imprime un salto de línea */
 	return	/* finaliza la ejecución de la función (en este caso, se podría omitir) */
 }
 
-function chars cadena (bool log)
+function char cadena (boolean log)
 {
-	if (log&&log)
-	{
-		return s
-	}
-	else
-	{
-		return "Fin"
-	}
+	if (log&&log) return s
+	if (log&&log) return "Fin"
+	
 }	/* fin cadena: función que devuelve una cadena*/
 
 /* Parte del programa principal:*/

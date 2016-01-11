@@ -54,7 +54,7 @@ class Yytoken {
 				new FileWriter(filename));
             System.out.println("Fichero Tokens.txt generado");
 			for(Yytoken t: this.tokens){
-				System.out.println(t);
+				//System.out.println(t);
 				out.write(t + "\n");
 			}
 			out.close();
