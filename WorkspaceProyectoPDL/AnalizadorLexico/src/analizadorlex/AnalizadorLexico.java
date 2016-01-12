@@ -572,20 +572,23 @@ public class AnalizadorLexico {
   /**
    * Contains user EOF-code, which will be executed exactly once,
    * when the end of file is reached
+   * @author Sergio C, se ha añadido una modificación extra para devolver un token eof
    */
-  private void zzDoEOF() {
+  private Yytoken zzDoEOF() {
+	  Yytoken t=null;
     if (!zzEOFDone) {
       zzEOFDone = true;
     	try{
 	    contador++;
-	    Yytoken t = new Yytoken(contador,"","eof",yyline,yycolumn);
+	    t = new Yytoken(contador,"","eof",yyline,yycolumn);
 	    tokens.add(t);
 		this.escribirEnFichero();
+		return t;
 	}catch(IOException ioe){
 		ioe.printStackTrace();
 	}
-
     }
+    return t;
   }
 
 
@@ -729,11 +732,13 @@ public class AnalizadorLexico {
 
       // store back cached position
       zzMarkedPos = zzMarkedPosL;
-
+      /**
+       * Devuelve un token en zzDoEOF()
+       * **/
       if (zzInput == YYEOF && zzStartRead == zzCurrentPos) {
         zzAtEOF = true;
-            zzDoEOF();
-        return null;
+        Yytoken t = zzDoEOF();
+        return t;
       }
       else {
         switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {
