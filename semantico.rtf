@@ -1,0 +1,103 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1187\cocoasubrtf400
+{\fonttbl\f0\fmodern\fcharset0 Courier;\f1\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;\red217\green11\blue0;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww15620\viewh12660\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+
+\f0\fs28 \cf0 	\
+\
+	\cf2 P -> B Z P \
+	P -> F Z P \
+	P -> Z P \
+	P -> eof\cf0 \
+\
+	Z -> cr Z'\
+\
+	Z' -> Z \
+	Z\'92 -> oc\
+\
+	B -> var T id [addTS id] W \
+	B -> if ( E ) S 	\
+	B -> S \
+	B -> for ( S ; E ; S ) Z \{ Z C \}\
+\
+	W -> , id [addTS id]\'a0W [guarda params]\
+	W -> = E W' [ params E.tipo + params W' ]\
+	W -> LAMBDA [null]\cf2 \
+\
+\cf0 	W' -> , id [addTS id] W [guarda params] \
+	W' -> LAMBDA [null]\
+\
+	S -> id S' [addTS(id,S\'92.tipo,S\'92.tam),S.tipo=ok]\
+	S -> return X [S.ret=X.tipo,S.tam=X.tam,S.tipo=ok]\
+	S -> write ( E ) \
+	S -> prompt ( id )\cf2 \
+\
+\cf0 	S' -> = E [S\'92.tipo=E.tipo, S\'92.tam=E.tam]\
+	S' -> %= E [S\'92.tipo=\'93int\'94if E.tipo=\'93int\'94 else error, S\'92.tam=E.tam]\cf2 \
+	S' -> ( L )\cf0 \
+\
+	T -> int [T.tipo=int,T.tam=2]\
+	T -> boolean [T.tipo=boolean,T.tam=1]\
+	T -> char [T.tipo=int,T.tam=1]\
+\
+	X -> E \cf2 \
+\cf0 	X -> LAMBDA [null]\cf2 \
+\
+	L -> E Q \
+\cf0 	L -> LAMBDA [null]\cf2 \
+\
+	Q -> , E Q \
+\cf0 	Q -> LAMBDA [null]\
+\
+	F -> function [creaTSfun] H [funret=H.tipo] id ( A [funparam=A.param] ) Z \{ Z C \}\
+\
+	H -> T [H.tipo=T.tipo,H.tam=T.tam]\cf2 \
+\cf0 	H -> LAMBDA [H.tipo=null]\
+\
+	A -> T id K [acumular en A.param la lista de T.tipo]\
+	A -> LAMBDA [null]\
+\
+	K -> , T id K [acumular en K.param la lista de T.tipo]\
+	K -> LAMBDA [null]\
+\
+	\cf2 C -> B Z C \
+\cf0 	C -> break \cf2 \
+\cf0 	C -> LAMBDA [null]\cf2 \
+\
+	E -> G E'\
+\
+	E' -> %= G E' \
+\cf0 	E' -> LAMBDA [null]\
+\cf2 \
+\cf0 	G -> R G'.\
+\
+	G' -> && R G' \cf2 \
+\cf0 	G' -> LAMBDA [null]\cf2 \
+\
+\cf0 	R -> U R' [R.tipo = boolean if U R' mismos tipos ]\
+\
+	R' -> == U R' [R1.tipo = tipo U y R' iguales ]\cf2 \
+\cf0 	R' -> LAMBDA [null]\cf2 \
+\
+\cf0 	U -> V U'\
+\
+	U' -> + V U' \
+	U' -> LAMBDA [null]\cf2 \
+\
+\cf0 	V -> id V' \cf2 \
+\cf0 	V -> ( E ) \cf2 \
+\cf0 	V -> num [V.tipo=int]\
+	V -> cadena [V.tipo=char]\
+	V -> true [V.tipo=boolean]\
+	V -> false [V.tipo=boolean]\cf2 \
+\
+\cf0 	V' -> ( L ) \cf2 \
+\cf0 	V' -> LAMBDA [null]
+\f1\fs24 \
+\
+\
+\
+\
+\
+}

@@ -2,22 +2,23 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="" key="selection"/>
+		<item value="zzDoEOF" key="selection"/>
 		<item value="true" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="zzDoEOF"/>
+			<item value="      if (zzInput == YYEOF &amp;&amp; zzStartRead == zzCurrentPos) {"/>
+			<item value="&#x09;"/>
+			<item value="\n\r"/>
+			<item value="\n"/>
+			<item value="H()"/>
+			<item value="First(W"/>
 			<item value="Follow(X"/>
-			<item value="Follow(Sp"/>
-			<item value="Follow(S"/>
-			<item value="Follow("/>
-			<item value="Z()"/>
-			<item value="T()"/>
-			<item value="try{"/>
-			<item value="try"/>
 		</list>
 		<list key="replacehistory">
+			<item value=""/>
 			<item value="org.antlr.v4."/>
 			<item value="org.antlr."/>
 		</list>
