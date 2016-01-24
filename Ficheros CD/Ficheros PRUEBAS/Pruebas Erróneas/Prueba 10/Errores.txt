@@ -1,0 +1,6 @@
+ERROR SEMÁNTICO  (línea 8): Sólo se pueden comparar tipos iguales.
+ERROR SEMÁNTICO  (línea 8): Se asigna tipo err a una variable tipo int.
+ERROR SEMÁNTICO  (línea 9): Sólo se pueden sumar tipos iguales.
+ERROR SEMÁNTICO  (línea 9): Se asigna tipo err a una variable tipo int.
+ERROR LÉXICO     (línea 10): No se reconoce el símbolo en la gramática, después del símbolo ")"
+

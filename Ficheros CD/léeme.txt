@@ -1,0 +1,108 @@
+**************************************************************************
+*            Jerarquía completa detallada existente en el CD             *
+**************************************************************************
+
+
+/** Memoria del proyecto **/
+G44_Memoria.pdf
+
+/** Autómata completo del Analizador Léxico **/
+Autómata A.Lexico.png
+
+
+/** Tabla de predicción LL(1), aunque nuestro algoritmo no es por tablas, sirve para comprobar que no hay errores **/
+Tabla Predicción LL1.png
+
+
+/** Contiene el ejecutable del Procesador **/
+Ejecutable Procesador/
+	AnalizadorLexicoG44.jar
+	
+/** Contiene todos los ficheros del código fuente **/		
+Fuentes Procesador/
+	AnalizadorLexico/
+		src/
+			analizadorlex/
+				AnalizadorLexico.java
+				AnalizadorLexicoExcepcion.java
+				AnalizadorSemanticoExcepcion.java
+				AnalizadorSintacticoExcepcion.java
+				Main.java
+				
+
+/** Gramática con el formato adecuado para VAST **/
+GramaticaVAST.txt
+
+
+/** Librerías usadas en el procesador **/
+Librerías Usadas/
+	JFlex/
+		alexico.flex
+		jflex-1.6.1.jar
+
+		
+/** Contiene todos los ficheros de pruebas y sus archivos, divididos en pruebas correctas y erróneas **/
+Ficheros PRUEBAS/
+	Pruebas Correctas/
+		Prueba 1/
+			arbol1.html
+			Parser.txt
+			pruebas1.txt
+			Tokens.txt
+			TS.txt
+		Prueba 2/
+			arbol2.html
+			Parser.txt
+			pruebas2.txt
+			Tokens.txt
+			TS.txt
+		Prueba 3/
+			arbol3.html
+			Parser.txt
+			pruebas3.txt
+			Tokens.txt
+			TS.txt
+		Prueba 4/
+			arbol4.html
+			Parser.txt
+			pruebas4.txt
+			Tokens.txt
+			TS.txt
+		Prueba 5/
+			arbol5.html
+			Parser.txt
+			pruebas5.txt
+			Tokens.txt
+			TS.txt
+	Pruebas Erróneas/
+		Prueba 10/
+			Errores.txt
+			Parser.txt
+			pruebas10.txt
+			Tokens.txt
+			TS.txt
+		Prueba 6/
+			Errores.txt
+			Parser.txt
+			pruebas6.txt
+			Tokens.txt
+			TS.txt
+		Prueba 7/
+			Errores.txt
+			Parser.txt
+			pruebas7.txt
+			Tokens.txt
+			TS.txt
+		Prueba 8/
+			Errores.txt
+			Parser.txt
+			pruebas8.txt
+			Tokens.txt
+			TS.txt
+		Prueba 9/
+			Errores.txt
+			Parser.txt
+			pruebas9.txt
+			Tokens.txt
+			TS.txt
+		

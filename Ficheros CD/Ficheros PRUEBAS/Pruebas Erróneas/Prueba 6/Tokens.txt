@@ -1,0 +1,42 @@
+< eol ,  >
+< eol ,  >
+< eol ,  >
+< eol ,  >
+< PalRes , function >
+< PalRes , boolean >
+< Id , funcBoolean >
+< ParAb , ( >
+< ParCer , ) >
+< eol ,  >
+< LlavAb , { >
+< eol ,  >
+< PalRes , var >
+< PalRes , boolean >
+< Id , dev >
+< eol ,  >
+< Id , dev >
+< OpAsig , = >
+< Boolean , false >
+< eol ,  >
+< PalRes , return >
+< Id , variableGlobal0 >
+< eol ,  >
+< LlavCer , } >
+< eol ,  >
+< eol ,  >
+< PalRes , var >
+< PalRes , int >
+< Id , variableGlobal >
+< eol ,  >
+< eol ,  >
+< PalRes , write >
+< ParAb , ( >
+< Cadena , "\nIntroduce un 'número'." >
+< ParCer , ) >
+< eol ,  >
+< PalRes , prompt >
+< ParAb , ( >
+< Id , num >
+< ParCer , ) >
+< eol ,  >
+< eof ,  >

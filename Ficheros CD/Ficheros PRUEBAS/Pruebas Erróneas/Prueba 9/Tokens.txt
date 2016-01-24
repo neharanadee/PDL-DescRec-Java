@@ -1,0 +1,92 @@
+< PalRes , var >
+< PalRes , char >
+< Id , var1 >
+< eol ,  >
+< PalRes , var >
+< PalRes , boolean >
+< Id , var2 >
+< eol ,  >
+< eol ,  >
+< PalRes , function >
+< PalRes , int >
+< Id , funcInt >
+< ParAb , ( >
+< PalRes , char >
+< Id , msg >
+< ParCer , ) >
+< eol ,  >
+< LlavAb , { >
+< eol ,  >
+< PalRes , return >
+< Num , 10 >
+< eol ,  >
+< LlavCer , } >
+< eol ,  >
+< eol ,  >
+< PalRes , function >
+< PalRes , char >
+< Id , funcChar >
+< ParAb , ( >
+< PalRes , int >
+< Id , n >
+< ParCer , ) >
+< eol ,  >
+< LlavAb , { >
+< eol ,  >
+< PalRes , var >
+< PalRes , int >
+< Id , i >
+< eol ,  >
+< eol ,  >
+< PalRes , for >
+< ParAb , ( >
+< Id , i >
+< OpAsig , = >
+< Boolean , false >
+< PtComa , ; >
+< Id , funcInt >
+< ParAb , ( >
+< Cadena , "prueba1" >
+< ParCer , ) >
+< OpAritSum , + >
+< Boolean , false >
+< PtComa , ; >
+< Id , i >
+< OpAsigMod , %= >
+< Boolean , true >
+< ParCer , ) >
+< eol ,  >
+< LlavAb , { >
+< eol ,  >
+< PalRes , var >
+< PalRes , char >
+< Id , texto >
+< eol ,  >
+< Id , texto >
+< OpAsig , = >
+< Cadena , "pasa desde bucle" >
+< eol ,  >
+< Id , var2 >
+< OpAsig , = >
+< Id , var2 >
+< OpLogAnd , && >
+< Boolean , false >
+< eol ,  >
+< PalRes , return >
+< Id , var2 >
+< eol ,  >
+< LlavCer , } >
+< eol ,  >
+< PalRes , return >
+< Cadena , "pasa la prueba" >
+< eol ,  >
+< LlavCer , } >
+< eol ,  >
+< Id , var1 >
+< OpAsig , = >
+< Id , funcChar >
+< ParAb , ( >
+< Num , 5 >
+< ParCer , ) >
+< eol ,  >
+< eof ,  >

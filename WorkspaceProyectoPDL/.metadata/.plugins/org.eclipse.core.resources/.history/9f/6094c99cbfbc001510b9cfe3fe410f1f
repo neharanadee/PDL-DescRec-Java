@@ -1,0 +1,12 @@
+function boolean funcBoolean(boolean bool)
+{
+	var boolean masmas /** Variable tabla 2 **/
+	
+	for(; masmas == false;) /** Inicialización y actualización vacías**/
+	{
+		if(bool == false) masmas = true		
+	}
+	return masmas
+}
+if (funcBoolean(false) == true) prompt(num)
+write(num)

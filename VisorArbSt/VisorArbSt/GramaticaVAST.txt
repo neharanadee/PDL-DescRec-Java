@@ -1,0 +1,98 @@
+//// Prueba 1
+//// Prueba fichero entrada
+//// Gramática LL(1)
+Axioma = Pp
+
+NoTerminales = { Pp P Z B S Sp T Tp X L Lp F C G Gp I A Ap E Ep R Rp U Up V Vp }
+
+Terminales = { eol var id if ( ) for ; { } , = return write prompt %= int boolean char function && == + num cadena true false eof break }
+
+//// El lenguaje que se genera el id*(id+id)
+Producciones = {
+	Pp -> P
+
+	P -> eol P
+	P -> B eol P
+	P -> F eol P
+	P -> eof
+
+	Z -> eol Z
+	Z -> lambda
+	
+	B -> var T id
+	B -> if ( E ) S
+	B -> S
+	B -> for ( I ; E ; A ) eol Z { eol Z C }
+
+	S -> id Sp
+	S -> return X
+	S -> write ( E )
+	S -> prompt ( id )
+	
+	Sp -> = E
+	Sp -> %= E
+	Sp -> ( L )
+	
+	T -> int
+	T -> boolean
+	T -> char
+	
+	Tp -> T
+	Tp -> lambda
+	
+	X -> E
+	X -> lambda
+	
+	L -> E Lp
+	L -> lambda
+	
+	Lp -> , E Lp
+	Lp -> lambda
+	
+	F -> function Tp id ( G ) eol Z { eol Z C }
+	
+	C -> B eol Z C
+	C -> lambda
+	
+	G -> T id Gp
+	G -> lambda
+	
+	Gp -> , T id Gp
+	Gp -> lambda
+	
+	I -> id = E
+	I -> lambda
+	
+	A -> id Ap
+	A -> lambda
+	
+	Ap -> = E
+	Ap -> %= E
+	
+	E -> R Ep
+	
+	Ep -> && R Ep
+	Ep -> lambda
+	
+	R -> U Rp
+	
+	Rp -> == U
+	Rp -> lambda
+	
+	U -> V Up
+	
+	Up -> + V Up
+	Up -> lambda
+	
+	V -> id Vp
+	V -> ( E )
+	V -> num
+	V -> cadena
+	V -> true
+	V -> false
+	
+	Vp -> ( L )
+	Vp -> lambda
+
+	
+}    

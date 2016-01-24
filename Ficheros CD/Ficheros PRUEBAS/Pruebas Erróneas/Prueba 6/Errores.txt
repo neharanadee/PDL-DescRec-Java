@@ -1,0 +1,1 @@
+ERROR SEMÁNTICO  (línea 13): El tipo de retorno de función no coincide con el declarado.

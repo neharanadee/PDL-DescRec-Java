@@ -1,0 +1,997 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package pruebas;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import analizadorlex.AnalizadorLexico;
+import analizadorlex.Yytoken;
+
+/**
+ *
+ * @author Sergio Chica
+ */
+public class Anais {
+
+	/**
+	 * Muestra un menu para elegir la opcion
+	 * mas conveniente
+	 * @param args the command line arguments
+	 */
+	static Yytoken tokenActual = null;
+	static AnalizadorLexico a = null;
+	static ArrayList<Integer> parser = new ArrayList<Integer>();
+
+	//Genero la estructura que almacenara las tablas
+	static ArrayList <TablaSimbolos> tablas = new ArrayList <TablaSimbolos>();
+	static int tablaActual = 0; //indica en que tabla nos encontramos
+
+	public static void main(String[] args) {
+
+		int opcion = 0;
+
+		java.util.Scanner in = new java.util.Scanner(System.in);
+
+		System.out.println("Seleccione una opcion:");
+		System.out.println("1) Generar Analizador Lexico a partir de alexico.flex");
+		System.out.println("2) Ejecutar archivo entrada.txt");
+		System.out.print("Opcion: ");
+		opcion = in.nextInt();
+		switch (opcion) {
+		case 1: {
+			System.out.println("\n*** Generando ***\n");
+			System.out.println("\n*** Procesando archivo alexico.flex ***\n");
+			String archLex = "alexico.flex";
+			String[] entrada = {archLex};
+			jflex.Main.main(entrada);
+			//Movemos el archivo generado al directorio src
+			File arch = new File("AnalizadorLexico.java");
+			if(arch.exists()){
+				System.out.println("" + arch);
+				Path currentRelativePath = Paths.get("");
+				String nuevoDir = currentRelativePath.toAbsolutePath().toString()
+						+ File.separator + "src" + File.separator 
+						+ "analizadorlex" + File.separator+arch.getName();
+				File archViejo = new File(nuevoDir);
+				archViejo.delete();
+				if(arch.renameTo(new File(nuevoDir))){
+					System.out.println("\n*** Generado ***\n");
+					System.out.println("\n*** Saliendo automaticamente ***\n");
+					System.exit(0);
+				}else{
+					System.out.println("\n*** No generado ***\n");
+				}
+			}else{
+				System.out.println("\n*** Codigo no existente ***\n");
+			}
+			break;
+		}
+		case 2: {
+			String entrada = "";
+			System.out.println("*** Procesando archivo entrada.txt ***");
+			entrada = "entrada.txt";
+			BufferedReader bf = null;
+
+			try {
+				bf = new BufferedReader(new FileReader(entrada));
+				a = new AnalizadorLexico(bf);
+				tokenActual = a.sigToken(); //Primer token
+				Pp();
+				//				do {//Todo el codigo
+				//					token = a.sigToken();
+				//					System.out.println(token.toString());
+				//				} while (token != null);
+			} catch (Exception ex) {
+				System.err.println(ex);
+				System.err.println("El token que no se encontro es: "+tokenActual+" linea "+linea()+"\n\n");//luego se quita
+				//Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+			} finally {
+				try {
+					bf.close();
+				} catch (IOException ex) {
+					//Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+				}
+			}
+			String filename = "Parser.txt";
+			BufferedWriter out;
+			try{
+				out = new BufferedWriter(
+						new FileWriter(filename));
+
+				System.out.println("Fichero Parser.txt generado");
+				out.write("Des ");
+				int num;
+				for(int i=0; i<parser.size();i++){
+					num = parser.get(i);
+					out.write(num+" ");
+				}
+				out.close();
+			}catch(Exception e){
+
+			}
+			break;
+		}
+		default: {
+			System.out.println("Opcion no valida.");
+			break;
+		}
+		}
+
+	}
+
+	public static boolean tokenActualIgual(String token){
+		if(token.equals("eol")
+				|| token.equals("eof")
+				|| token.equals("Id")
+				|| token.equals("Num")
+				|| token.equals("Cadena")){
+			return tokenActual.tipo.equals(token);
+
+		}else
+			return tokenActual.token.equals(token);
+	}
+	public static void compToken(String token){
+		if(token.equals("Id")){
+			if(tokenActualIgual(token)){
+				try{
+					tokenActual=a.sigToken();
+				}catch (Exception ex) {
+				}
+			}else
+				throw new RuntimeException("Para el carro!!Token inválido en comprobarToken - Id");
+		}else if(token.equals("eol")){
+			if(tokenActualIgual(token)){
+				try{
+					tokenActual=a.sigToken();
+				}catch (Exception ex) {
+				}
+			}else
+				throw new RuntimeException("Para el carro!!Token inválido en comprobarToken - eol");
+		}else if(token.equals("eof")){
+			if(tokenActualIgual(token)){
+				try{
+					tokenActual=a.sigToken();
+				}catch (Exception ex) {
+				}
+			}else
+				throw new RuntimeException("Para el carro!!Token inválido en comprobarToken - eof");
+		}else if(token.equals("Num")){
+			if(tokenActualIgual(token)){
+				try{
+					tokenActual=a.sigToken();
+				}catch (Exception ex) {
+				}
+			}else
+				throw new RuntimeException("Para el carro!!Token inválido en comprobarToken - Num");
+		}else if(token.equals("Cadena")){
+			if(tokenActualIgual(token)){
+				try{
+					tokenActual=a.sigToken();
+				}catch (Exception ex) {
+				}
+			}else
+				throw new RuntimeException("Para el carro!!Token inválido en comprobarToken - Cadena");
+		}else{
+			if(tokenActualIgual(token)){
+				try{
+					tokenActual=a.sigToken();
+				}catch (Exception ex) {
+				}
+			}else
+				throw new RuntimeException("Para el carro!!Token inválido en comprobarToken - Resto");
+		}
+	}
+
+	//Este metodo busca en la tabla de simbolos un id para saber si esta
+	//ya declarado y la tabla actual desde la q buscarlo.
+	//Devuelve true si ya estaba declarado y false en caso contrario.
+	public static boolean buscaTS (String nameId, int numT){
+		TablaSimbolos t = tablas (numT);
+		int i = 1; //el cero lo reservo al puntero
+		while (t[i] != null){ //este bucle recorre una tabla
+			if (t[i].tipo == id && t[i].nom == nameId)	//no se si es del todo necesario sacar el tipo
+				return false; //ya ha sido declarada
+			i++;
+			if (t[0] != null) //si tiene un ambito superior lo analiza
+				buscaTS (nameId, t[0]);
+		}
+		return true;
+	} 
+
+	public static void Pp(){//P' -> P
+		//creo una nueva tabla de simbolos
+		TablaSimbolos tab = new TablaSimbolos();
+		tablas.add(tab);
+		if(tokenActualIgual("eol")
+				|| tokenActualIgual("eof")
+				|| tokenActualIgual("var")
+				|| tokenActualIgual("if") 
+				|| tokenActualIgual("for") 
+				|| tokenActualIgual("Id")
+				|| tokenActualIgual("return")
+				|| tokenActualIgual("write")
+				|| tokenActualIgual("prompt")
+				|| tokenActualIgual("function")){//First(P) = eol, eof, var, if, for, id, return, write, prompt, function
+			parser.add(1);
+			P();
+		}
+	}
+
+
+	public static Entrada P(){//P -> eol P | B eol P | F eol P | eof
+		if(tokenActualIgual("eol")){//First(eolP) = eol
+			parser.add(2);
+			compToken("eol");
+			P();
+
+		}else if (tokenActualIgual("var")
+				|| tokenActualIgual("if") 
+				|| tokenActualIgual("for") 
+				|| tokenActualIgual("Id")
+				|| tokenActualIgual("return")
+				|| tokenActualIgual("write")
+				|| tokenActualIgual("prompt")){//First(BeolP) = var, if, for, id, return, write, prompt
+			parser.add(3);
+			B();
+			compToken("eol");
+			P();
+
+		}else if (tokenActualIgual("function")){//First(FeolP) = function
+			parser.add(4);
+			F();
+			compToken("eol");
+			P();
+
+		}else if (tokenActualIgual("eof")){//First(eof) = eof
+			parser.add(5);
+			compToken("eof");
+			//escribir todas las tablas en un fichero
+			//borrar todas las tablas
+
+		}else {
+			throw new RuntimeException("Error en P, no se ha aceptado ningún token");
+
+		}
+	}
+
+
+	public static void Z(){//Z -> eol Z | LAMBDA
+		if(tokenActualIgual("eol")){//First(eolZ) = eol
+			parser.add(6);
+			compToken("eol");
+			Z();
+			//return new Entrada(0,null,null,0,null,null);
+
+		}else if(tokenActualIgual("var")
+				|| tokenActualIgual("if") 
+				|| tokenActualIgual("for") 
+				|| tokenActualIgual("Id")
+				|| tokenActualIgual("return")
+				|| tokenActualIgual("write")
+				|| tokenActualIgual("prompt")
+				|| tokenActualIgual("{")
+				|| tokenActualIgual("}")){//Follow(Z) = var, if, for, id, return, write, prompt, {, }
+			parser.add(7);
+			//Nothing
+
+		}else
+			throw new RuntimeException("Error en Z, no se ha aceptado ningún token");
+	}
+
+	public static Entrada B(){//B -> var T id | if ( E ) S | S | for ( I ; E ; A ) eol Z { eol Z C }
+		if(tokenActualIgual("var")){//First(varTid) = var
+			parser.add(8);
+			compToken("var");
+			Entrada T = T();
+			//Buscar si ya declarada -> Si: Error || No insertamos
+			tablas(tablaActual).add(T); //se mete en la tabla la entrada de "id"
+			compToken("Id");
+			//Entrada D = D();
+			/*add id TS T.tipo T.despl a ids a partir del primero*/
+
+			return new Entrada(0,null,null,0,null,null);
+
+		}else if(tokenActualIgual("if")){// First(if(E)S) = if
+			parser.add(9);
+			compToken("if");
+			compToken("(");
+			Entrada E = E();
+			if (E.getTipo()!="boolean") 
+				System.out.println("Error (linea "+linea()+"): condicional espera tipo logico, se introduce "+E.getTipo()+"");
+			compToken(")");
+			Entrada S = S();
+			if (S.getTipo().equals("err") )
+				System.out.println("Error (linea "+linea()+"): sentencia del condicional incorrecta");
+			return new Entrada(0,null,S.getTipo(),0,null,null);
+
+		}else if(tokenActualIgual("Id")
+				|| tokenActualIgual("return")
+				|| tokenActualIgual("write")
+				|| tokenActualIgual("prompt")){//First(S)= id, return, write, prompt
+			parser.add(10);
+			Entrada S = S();
+			if ( S.getTipo().equals("err") )
+				System.out.println("Error (linea "+linea()+"): sentencia incorrecta");
+			return new Entrada(0,null,S.getTipo(),0,null,null);
+
+		}else if(tokenActualIgual("for")){//First(for(I;E;A)eolZ{eolZC}) = for
+			parser.add(11);
+			compToken("for");
+			compToken("(");
+			Entrada I = I();
+			if ( S1.getTipo().equals("err") )
+				System.out.println("Error (linea "+linea()+"): sentencia incorrecta primera parte del for");
+			compToken(";");
+			Entrada E = E();
+			if ( !E.getTipo().equals("boolean") )
+				System.out.println("Error (linea "+linea()+"): sentencia incorrecta segunda parte del for");
+			compToken(";");
+			Entrada A = A();
+			if (S2.getTipo().equals("err") )
+				System.out.println("Error (linea "+linea()+"): sentencia incorrecta tercera parte del for");
+			compToken(")");
+			compToken("eol");
+			Z();
+			compToken("{");
+			compToken("eol");
+			Z();
+			C();
+			compToken("}");
+			return new Entrada(0,null,null,0,null,null);
+
+		}else
+			throw new RuntimeException("Error en B, no se ha aceptado ningun token");
+	}	
+	/** Este metodo ya no se usa */
+	/*	public static Entrada D(){//D -> , id D | .
+		if(tokenActualIgual(",")){//First(,idD) = ,
+			compToken(",");
+			compToken("Id");
+			//addTS id sin tipo, luego se mete en B
+			Entrada D = D();
+			return new Entrada (0,null,null,0,null,null);
+
+		}else if(tokenActualIgual("eol")){// Follow(D) = cr
+			// Nothing
+			return new Entrada (0,null,null,0,null,null);
+
+		}else
+			throw new RuntimeException("Error en W, no se ha aceptado ningún token");
+	}
+	 */
+
+	public static Entrada S(){//S -> id S' | return X | write ( E ) | prompt ( id )
+		if(tokenActualIgual("Id")){//First(idS') = id
+			parser.add(12);
+			compToken("Id");
+			Entrada Sp = Sp();
+			if ( /*!found id && */ !Sp.getTipo().equals("int") ) {
+				/*addTS global id como int*/
+				System.out.println("Error (linea "+linea()+"): se asigna tipo "+Sp.getTipo()+" a una variable tipo int");
+				return new Entrada (0,null,"err",0,null,null);
+			} else if ( /*found id && */ !Sp.getTipo().equals("tipoiddTS" )) {
+				System.out.println("Error (linea "+linea()+"): se asigna tipo "+Sp.getTipo()+" a una variable tipo tipoiddTS");
+				return new Entrada (0,null,"err",0,null,null);
+			}
+			/*addTS id Sp.tipo, Sp.tam */
+			return new Entrada (0,null,"ok",0,null,null);
+
+		}else if(tokenActualIgual("return")){// First(returnX) = return
+			parser.add(13);
+			compToken("return");
+			Entrada X = X();
+			return new Entrada (0,null,"ok",X.getDespl(),null,X.getTipo());
+
+		}else if(tokenActualIgual("write")){// First(write(E)) = write
+			parser.add(14);
+			compToken("write");
+			compToken("(");
+			Entrada E = E();
+			compToken(")");
+			return new Entrada (0,null,"ok",0,null,null);
+
+		}else if(tokenActualIgual("prompt")){// First(prompt(id)) = prompt
+			parser.add(15);
+			compToken("prompt");
+			compToken("(");
+			compToken("Id");
+			compToken(")");
+			return new Entrada (0,null,"ok",0,null,null);
+
+		}else
+			throw new RuntimeException("Error en S, no se ha aceptado ningun token");
+	}
+	public static Entrada Sp(){//S' -> = E | %= E | ( L ).
+		if(tokenActualIgual("=")){//First(=E) = =
+			parser.add(16);
+			compToken("=");
+			Entrada E = E();
+			return new Entrada (0,null,E.getTipo(),E.getDespl(),null,null);
+
+		}else if(tokenActualIgual("%=")){// First(%=E) = %=
+			parser.add(17);
+			compToken("%=");
+			Entrada E = E();
+			if ( !E.getTipo().equals("int") ) {
+				System.out.println("Error (linea "+linea()+"): se usa tipo "+E.getTipo()+" en %= que solo permite int");
+				return new Entrada (0,null,"err",0,null,null);
+			}				
+			return new Entrada(0,null,"int",E.getDespl(),null,null);
+
+		}else if(tokenActualIgual("(")){// First((L)) = (
+			parser.add(18);
+			compToken("(");
+			Entrada L = L();
+			compToken(")");
+			return new Entrada (0,null,null,0,L.getParam(),null);
+
+		}else
+			throw new RuntimeException("Error en Sp, no se ha aceptado ningun token");
+	}
+
+	public static Entrada T() {//T -> int | boolean | char.
+		if(tokenActualIgual("int")){//First(int) = int
+			parser.add(19);
+			compToken("int");
+			return new Entrada (0,null,"int",2,null,null);
+
+		}else if(tokenActualIgual("boolean")){// First(boolean) = boolean
+			parser.add(20);
+			compToken("boolean");
+			return new Entrada (0,null,"boolean",1,null,null);
+
+		}else if(tokenActualIgual("char")){// First(char) = char
+			parser.add(21);
+			compToken("char");
+			return new Entrada (0,null,"char",1,null,null);
+
+		}else{
+			//System.err.print("Linea "+tokenActual.linea+", ");
+			throw new RuntimeException("Error en T, no se ha aceptado ningun token");
+		}
+
+	}
+
+	public static Entrada Tp(){//T' -> T | LAMBDA.
+		if(tokenActualIgual("int") 
+				|| tokenActualIgual("boolean")
+				|| tokenActualIgual("char")){//First(T) = int, boolean, char
+			parser.add(22);
+			Entrada T = T();
+			return new Entrada (0,null,T.getTipo(),T.getDespl(),null,null);
+
+		}else if(tokenActualIgual("Id")){// Follow(T') = id
+			parser.add(23);
+			// Nothing
+			return new Entrada (0,null,null,0,null,null);
+		}else
+			throw new RuntimeException("Error en Tp, no se ha aceptado ningun token");
+	}
+
+
+	public static Entrada X(){//X -> E | LAMBDA.
+		if(tokenActualIgual("Id") 
+				|| tokenActualIgual("(")
+				|| tokenActualIgual("Num")
+				|| tokenActualIgual("Cadena")
+				|| tokenActualIgual("true")
+				|| tokenActualIgual("false")){//First(E) = id, (, num, cadena, true, false
+			parser.add(24);
+			Entrada E = E();
+			return new Entrada (0,null,E.getTipo(),E.getDespl(),null,null);
+
+		}else if(tokenActualIgual("eol")){// Follow(X) = eol
+			parser.add(25);
+			// Nothing
+
+			return new Entrada (0,null,null,0,null,null);
+
+		}else
+			throw new RuntimeException("Error en X, no se ha aceptado ningun token");
+	}
+
+	public static Entrada L(){//L -> E L' | LAMBDA.
+		if(tokenActualIgual("Id")
+				||tokenActualIgual("(")
+				|| tokenActualIgual("Num")
+				|| tokenActualIgual("Cadena")
+				|| tokenActualIgual("true")
+				|| tokenActualIgual("false")){//First(ELp) = id, (, num, cadena, true, false
+			parser.add(26);
+			Entrada E = E();
+			Entrada Lp = Lp();
+			ArrayList<String> expr = new ArrayList<String>();
+			expr.add(E.getTipo());
+			expr.addAll(Lp.getParam());
+			return new Entrada (0,null,null,0,expr,null);
+
+		}else if(tokenActualIgual(")")){// Follow(L) = )
+			parser.add(27);
+			// Nothing
+			return new Entrada (0,null,null,0,null,null);
+
+		}else
+			throw new RuntimeException("Error en L, no se ha aceptado ningun token");
+	}
+
+	public static Entrada Lp(){//L' -> , E L' | LAMBDA.
+		if(tokenActualIgual(",")){//First(,EL') = ,
+			parser.add(28);
+			compToken(",");
+			Entrada E = E();
+			Entrada Lp = Lp();
+			ArrayList<String> expr = new ArrayList<String>();
+			expr.add(E.getTipo());
+			expr.addAll(Lp.getParam());
+			return new Entrada (0,null,null,0,expr,null);
+
+		}else if(tokenActualIgual(")")){// Follow(Lp) = )
+			parser.add(29);
+			// Nothing
+			return new Entrada (0,null,null,0,null,null);
+
+		}else
+			throw new RuntimeException("Error en Lp, no se ha aceptado ningun token");
+	}
+
+	public static Entrada F(){//F -> function T’ id ( G ) eol Z { eol Z C }
+		if(tokenActualIgual("function")){//First(functionT'id(G)eolZ{eolZC}) = function
+			parser.add(30);
+			/*Crea sub-TS*/
+			compToken("function");
+			Entrada Tp = Tp();
+			compToken("Id");
+			/*addTS id tipo ret H.tipo*/
+			compToken("(");
+			Entrada G = G();
+			compToken(")");
+			/*addTS id tipo funcion retorno tipo H, argumentos entrada params de A */
+			compToken("eol");
+			Z();
+			compToken("{");
+			compToken("eol");
+			Z();
+			Entrada C = C();
+			compToken("}");
+			/*Tipo devuelto por C sea el de Tp*/
+			return new Entrada (0,null,(Tp.getTipo()==C.getTipo())?"ok":"err",0,null,null);
+
+		}else
+			throw new RuntimeException("Error en F, no se ha aceptado ningun token");
+	}
+
+	public static Entrada C(){//C -> B eol Z C | LAMBDA.
+		if(tokenActualIgual("var") 
+				|| tokenActualIgual("if") 
+				|| tokenActualIgual("for") 
+				|| tokenActualIgual("Id") 
+				|| tokenActualIgual("return") 
+				|| tokenActualIgual("write")
+				|| tokenActualIgual("prompt")){//First(BeolZC) = var, if, for, id, return, write, prompt
+			parser.add(31);
+			B();
+			compToken("eol");
+			Z();
+			C();
+			return new Entrada (0,null,null,0,null,null);
+
+		}else if(tokenActualIgual("}")){// Follow(C) = }
+			parser.add(32);
+			// Nothing
+			return new Entrada (0,null,null,0,null,null);
+
+		}else
+			throw new RuntimeException("Error en C, no se ha aceptado ningún token");
+	}
+
+	public static Entrada G(){//G -> T id G' | LAMBDA.
+		if(tokenActualIgual("int") 
+				|| tokenActualIgual("boolean")
+				|| tokenActualIgual("char")){//First(TidG') = int, boolean, char
+			parser.add(33);
+			Entrada T = T();
+			compToken("Id");
+			/*Introducir tabla Id con Id.nombre, T.tipo, T.tam en la TS de la funcion*/
+			Entrada Gp = Gp();
+			ArrayList<String> params = new ArrayList<String>();
+			params.add(T.getTipo());							// Anade a la lista el tipo del parametro que va antes
+			for (String s : Gp.getParam() ) { params.add(s); }	// Anade resto de tipos a la lista en orden
+			return new Entrada(0,null,null,0,params,null);		// a A se le guarda la lista completa de parametros
+		}else if(tokenActualIgual(")")){// Follow(G) = )
+			parser.add(34);
+			// Nothing
+			return new Entrada(0,null,null,0,null,null);
+		}else
+			throw new RuntimeException("Error en G, no se ha aceptado ningun token");
+	}
+
+	public static Entrada Gp(){//G' -> , T id G' | LAMBDA.
+		if(tokenActualIgual(",")){//First(,TidG') = ,
+			parser.add(35);
+			compToken(",");
+			Entrada T = T();
+			compToken("Id");
+			/*Introducir tabla Id con Id.nombre, T.tipo, T.tam en la TS de la funcion*/
+			Entrada Gp = Gp();
+			ArrayList<String> params = new ArrayList<String>();
+			params.add(T.getTipo());							// Anade a la lista el tipo del parametro que va a antes
+			for (String s : Gp.getParam() ) { params.add(s); }	// Anade resto de tipos a la lista en orden
+			return new Entrada(0,null,null,0,params,null);
+
+		}else if(tokenActualIgual(")")){// Follow(K) = )
+			parser.add(36);
+			// Nothing
+			return new Entrada(0,null,null,0,null,null);
+		}else
+			throw new RuntimeException("Error en Gp, no se ha aceptado ningun token");
+	}
+
+	public static void I(){//I -> id = E | LAMBDA
+		if(tokenActualIgual("Id")){//First(id=E) = id
+			parser.add(37);
+			compToken("Id");
+			compToken("=");
+			E();
+
+		}else if(tokenActualIgual(";")){// Follow(I) = ;
+			parser.add(38);
+			// Nothing
+
+		}else
+			throw new RuntimeException("Error en I, no se ha aceptado ningún token");
+	}
+
+	public static void A(){//A -> id A’ | LAMBDA
+		if(tokenActualIgual("Id")){//First(idA') = id
+			parser.add(39);
+			compToken("Id");
+			Ap();
+
+		}else if(tokenActualIgual(")")){// Follow(A) = )
+			parser.add(40);
+			// Nothing
+
+		}else
+			throw new RuntimeException("Error en A, no se ha aceptado ningún token");
+	}
+
+	public static void Ap(){//A’ -> = E | %= E
+		if(tokenActualIgual("=")){//First(=E) = =
+			parser.add(41);
+			compToken("=");
+			E();
+
+		}else if(tokenActualIgual("%=")){// First(%=E) = %=
+			parser.add(42);
+			// Nothing
+
+		}else
+			throw new RuntimeException("Error en Ap, no se ha aceptado ningún token");
+	}
+
+
+	/*** Estos métodos no se utilizan más */
+	/*	public static Entrada E(){//E -> G E'.
+		if(tokenActualIgual("Id")||tokenActualIgual("(")
+				|| tokenActualIgual("Num")
+				|| tokenActualIgual("Cadena")
+				|| tokenActualIgual("true")
+				|| tokenActualIgual("false")){//First(GE') = id, (, num, cadena, true, false
+			G();
+			Ep();
+
+		}else
+			throw new RuntimeException("Error en E, no se ha aceptado ningun token");
+	}
+	public static Entrada Ep(){//E' -> %= G E' | LAMBDA.
+		if(tokenActualIgual("%=")){//First(%=GEp) = %=
+			compToken("%=");
+			Entrada G = G();
+			Entrada Ep = Ep();
+			if ( !Ep.getTipo().equals(G.getTipo()) ) {
+				System.out.println("Error (linea "+linea()+"): %= solo para tipo int ");
+				return new Entrada (0,null,"err",0,null,null);
+			}
+
+		}else if(tokenActualIgual(")")||tokenActualIgual(",")
+				|| tokenActualIgual("=")
+				|| tokenActualIgual(";")
+				|| tokenActualIgual("eol")){// Follow(Ep) = ), ,, =, ;, eol
+			// Nothing
+			return new Entrada (0,null,null,0,null,null);
+
+		}else
+			throw new RuntimeException("Error en Ep, no se ha aceptado ningun token");
+	}*/
+	public static Entrada E(){//E -> R E'.
+		if(tokenActualIgual("Id")
+				||tokenActualIgual("(")
+				|| tokenActualIgual("Num")
+				|| tokenActualIgual("Cadena")
+				|| tokenActualIgual("true")
+				|| tokenActualIgual("false")){//First(RE') = id, (, num, cadena, true, false
+			parser.add(43);
+			Entrada R = R();
+			Entrada Ep = Ep();
+			if ( !R.getTipo().equals(Ep.getTipo()) ) {
+				System.out.println("Error (linea "+linea()+"): operaciones logicas solo con operandos logicos ");
+				return new Entrada (0,null,"err",0,null,null);
+			}
+			return new Entrada (0,null,"boolean",1,null,null);
+
+		}else
+			throw new RuntimeException("Error en E, no se ha aceptado ningun token");
+	}
+
+	public static Entrada Ep(){//E' -> && R E' | LAMBDA.
+		if(tokenActualIgual("&&")){//First(&&REp) = &&
+			parser.add(44);
+			compToken("&&");
+			Entrada R = R();
+			Entrada Ep = Ep();
+			if ( !R.getTipo().equals(Ep.getTipo()) ) {
+				System.out.println("Error (linea "+linea()+"): operaciones logicas solo con operandos logicos ");
+				return new Entrada (0,null,"err",0,null,null);
+			}
+			return new Entrada (0,null,"boolean",1,null,null);
+
+		}else if(tokenActualIgual(")")
+				|| tokenActualIgual(",")
+				|| tokenActualIgual(";")
+				|| tokenActualIgual("eol")){// Follow(Ep) = ), ,, ;, eol
+			parser.add(45);
+			// Nothing
+			return new Entrada (0,null,null,0,null,null);
+
+		}else
+			throw new RuntimeException("Error en Ep, no se ha aceptado ningun token");
+	}
+
+	public static Entrada R(){//R -> U R'.
+		if(tokenActualIgual("Id")||tokenActualIgual("(")
+				|| tokenActualIgual("Num")
+				|| tokenActualIgual("Cadena")
+				|| tokenActualIgual("true")
+				|| tokenActualIgual("false")){//First(UR') = id, (, num, cadena, true, false
+			parser.add(46);
+			Entrada U = U();
+			Entrada Rp = Rp();
+			if ( !U.getTipo().equals(Rp.getTipo()) ) {
+				System.out.println("Error (linea "+linea()+"): solo se pueden comparar tipos iguales ");
+				return new Entrada (0,null,"err",0,null,null);
+			}
+			return new Entrada (0,null,"boolean",1,null,null);
+
+		}else
+			throw new RuntimeException("Error en R, no se ha aceptado ningun token");
+	}
+
+	public static Entrada Rp(){//R' -> == U | LAMBDA.
+		if(tokenActualIgual("==")){//First(==U) = ==
+			parser.add(47);
+			compToken("==");
+			Entrada U = U();
+			/*Entrada Rp = Rp();
+			if ( !U.getTipo().equals(Rp.getTipo()) ) {
+				System.out.println("Error (linea "+linea()+"): solo se pueden comparar tipos iguales ");
+				return new Entrada (0,null,"err",0,null,null);
+			}*/
+			return new Entrada (0,null,U.getTipo(),U.getDespl(),null,null);
+
+		}else if(tokenActualIgual("&&")
+				||tokenActualIgual(")")
+				||tokenActualIgual(",")
+				|| tokenActualIgual(";")
+				|| tokenActualIgual("eol")){// Follow(Rp) = &&, ), ,, ;, eol
+			parser.add(48);
+			// Nothing
+			return new Entrada (0,null,null,0,null,null);
+
+		}else
+			throw new RuntimeException("Error en Rp, no se ha aceptado ningun token");
+	}
+
+	public static Entrada U(){//U -> V U'.
+		if(tokenActualIgual("Id")||tokenActualIgual("(")
+				|| tokenActualIgual("Num")
+				|| tokenActualIgual("Cadena")
+				|| tokenActualIgual("true")
+				|| tokenActualIgual("false")){//First(VU') = id, (, num, cadena, true, false
+			parser.add(49);
+			Entrada V = V();
+			Entrada Up = Up();
+			if ( !V.getTipo().equals(Up.getTipo()) ) {
+				System.out.println("Error (linea "+linea()+"): solo se pueden sumar tipos iguales ");
+				return new Entrada (0,null,"err",0,null,null);
+			}
+			return new Entrada (0,null,Up.getTipo(),Up.getDespl(),null,null);
+
+		}else
+			throw new RuntimeException("Error en U, no se ha aceptado ningun token");
+	}
+
+	public static Entrada Up(){//U' -> + V U' | LAMBDA.
+		if(tokenActualIgual("+")){//First(+VUp) = +
+			parser.add(50);
+			compToken("+");
+			Entrada V = V();
+			Entrada Up = Up();
+			if ( !V.getTipo().equals(Up.getTipo()) ) {
+				System.out.println("Error (linea "+linea()+"): solo se pueden sumar tipos iguales ");
+				return new Entrada (0,null,"err",0,null,null);
+			}
+			return new Entrada (0,null,Up.getTipo(),Up.getDespl(),null,null);
+
+		}else if(tokenActualIgual("==")
+				||tokenActualIgual("&&")
+				||tokenActualIgual(")")
+				|| tokenActualIgual(",")
+				|| tokenActualIgual(";")
+				|| tokenActualIgual("eol")){// Follow(Up) = ==, &&, ), ,, ;, eol
+			parser.add(51);
+			// Nothing
+			return new Entrada (0,null,null,0,null,null);
+
+		}else
+			throw new RuntimeException("Error en Up, no se ha aceptado ningún token");
+	}
+
+	public static Entrada V(){//V -> id V' | ( E ) | entero | cadena | true | false.
+		if(tokenActualIgual("Id")){//First(idV') = id
+			parser.add(52);
+			compToken("Id");
+			Entrada Vp = Vp();
+			//if ( /*!found id TS or id.tipo!= funcion*/) {
+			//	System.out.println("Error (linea "+linea()+"): id no es una funcion ");
+			//	return new Entrada (0,null,null,0,null,null);
+			// }
+			// if tipos params id != Vp.params ) {
+			// System.out.println("Error (linea "+linea()+"): la funcion recibe "+id.param.printParam() );
+			// return new Entrada (0,null,null,0,null,null);
+			// }
+			return new Entrada (0,null,/*id.ret type*/null,0,null,null); 
+
+		}else if(tokenActualIgual("(")){//First((E)) = (
+			parser.add(53);
+			compToken("(");
+			Entrada E = E();
+			compToken(")");
+			return new Entrada (0,null,E.getTipo(),E.getDespl(),null,null);
+
+		}else if(tokenActualIgual("Num")){//First(entero) = entero
+			parser.add(54);
+			if ( Integer.parseInt(tokenActual.token) > 32767 )
+				System.out.println("Error (linea "+linea()+"): numero maximo permitido es 32767 ");
+			compToken("Num");
+			return new Entrada(0,null,"int",2,null,null);
+
+		}else if(tokenActualIgual("Cadena")){//First(cadena) = cadena
+			parser.add(55);
+			compToken("Cadena");
+			return new Entrada(0,null,"char",1,null,null);
+
+		}else if(tokenActualIgual("true")){//First(true) = true
+			parser.add(56);
+			compToken("true");
+			return new Entrada(0,null,"boolean",1,null,null);
+
+		}else if(tokenActualIgual("false")){//First(false) = false
+			parser.add(57);
+			compToken("false");
+			return new Entrada(0,null,"boolean",1,null,null);
+
+		}else
+			throw new RuntimeException("Error en V, no se ha aceptado ningún token");
+	}
+
+	public static Entrada Vp(){//V' -> ( L ) | LAMBDA.
+		if(tokenActualIgual("(")){//First((L)) = (
+			parser.add(58);
+			compToken("(");
+			Entrada L = L();
+			compToken(")");
+			return new Entrada (0,null,null,0,L.getParam(),null);
+
+		}else if(tokenActualIgual("+")
+				||tokenActualIgual("==")
+				|| tokenActualIgual("&&")
+				||tokenActualIgual(")")
+				|| tokenActualIgual(",")
+				|| tokenActualIgual(";")
+				|| tokenActualIgual("eol")){// Follow(Vp) = +, ==, &&, ), ,, ;, eol
+			parser.add(59);
+			// Nothing
+			return new Entrada (0,null,null,0,null,null);
+
+		}else
+			throw new RuntimeException("Error en Vp, no se ha aceptado ningún token");
+	}
+
+
+	public static int linea(){
+		return tokenActual.linea+1;
+	}
+
+
+}
+
+
+
+class Entrada{
+	private int 		pos;	// Posicion en la TS
+	private String 		nom;	// Nombre identificador
+	private String 		tipo;	// Tipo identificador
+	private int 		despl;	// Tamano entrada
+	private ArrayList<String> 	param;	// Parametros entrada
+	private String 		ret;	// Tipo retorno
+
+	public Entrada(int pos, String nom, String tipo, int despl,
+			ArrayList<String> param, String ret) {
+		super();
+		this.pos = pos;
+		this.nom = nom;
+		this.tipo = tipo;
+		this.despl = despl;
+		this.param = param;
+		this.ret = ret;
+	}
+
+	public int getPosicion() {
+		return pos;
+	}
+
+	public String getIdent() {
+		return nom;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public int getDespl() {
+		return despl;
+	}
+
+	public ArrayList<String> getParam() {
+		return param;
+	}
+
+	public String printParam() {
+		String getparam = "[ ";
+		for (String s : param ) { getparam = getparam +", " + s + " "; }
+		getparam = getparam + "]";
+		return getparam;
+	}
+
+	public String getRet() {
+		return ret;
+	}
+
+	@Override
+	public String toString() {
+		return  "Entrada [posicion=" + pos + ", ident=" + nom
+				+ ", tipo=" + tipo + ", despl=" + despl + ", param=" + printParam() + "]" ;
+	}
+
+
+}
+class TablaSimbolos{
+	ArrayList<Entrada> tabla;
+	public TablaSimbolos(){
+		tabla = new ArrayList<Entrada>();
+	}
+}
+

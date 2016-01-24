@@ -1,0 +1,9 @@
+package analizadorlex;
+
+public class Anais {
+
+	public Anais() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

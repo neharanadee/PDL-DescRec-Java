@@ -1,0 +1,7 @@
+var int kk
+function int funcInt(char msg)
+{
+	var boolean bb
+	if  (bb) bb = kk == 9 && bb
+	return 8
+}

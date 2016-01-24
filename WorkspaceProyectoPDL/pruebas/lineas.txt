@@ -1,0 +1,26 @@
+157 P' -> P
+180 P -> eol P | B eol P | F eol P | eof
+221 Z -> eol Z | LAMBDA
+244 B -> var T id | if ( E ) S | S | for ( I ; E ; A ) eol Z { eol Z C }
+328 S -> id S’ | return X | write ( E ) | prompt ( id )
+379 S’-> = E | %= E | ( L )
+407 T -> int | boolean | char
+430 T’-> T | LAMBDA
+448 X -> E | LAMBDA
+468 L -> E L’ | LAMBDA
+495 L’-> , E L’ | LAMBDA
+518 F -> function T’ id ( G ) eol Z { eol Z C }
+555 C -> B eol Z C | LAMBDA
+590 G -> T id G’ | LAMBDA
+618 G’-> , T id G’ | LAMBDA
+645 I -> id = E | LAMBDA
+670 A -> id A’ | LAMBDA
+695 A’ -> = E | %= E
+717 E -> R E’ 
+743 E’ -> && R E’ | LAMBDA
+767 R -> U R’
+789 R’ -> == U | LAMBDA
+809 U -> V U’
+828 U’ -> + V U’ | LAMBDA
+854 V -> id V’| ( E ) | numero | cadena | true | false
+919 V’ -> ( L ) | LAMBDA

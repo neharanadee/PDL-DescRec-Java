@@ -1,0 +1,35 @@
+CONTENIDO DE LA TABLA # 0:
+  * LEXEMA    : 'funcBoolean'
+    ATRIBUTOS :  (funcion)
+    + tipo    : 'boolean'
+    + param 1 : 'boolean'
+
+  * LEXEMA    : 'num'
+    ATRIBUTOS : 
+    + tipo    : 'int'
+    + despl   : 0
+
+----------------------------------------------------
+
+CONTENIDO DE LA TABLA # 1:
+  * LEXEMA    : 'bool'
+    ATRIBUTOS : 
+    + tipo    : 'boolean'
+    + despl   : 0
+
+  * LEXEMA    : 'masmas'
+    ATRIBUTOS : 
+    + tipo    : 'boolean'
+    + despl   : 1
+
+----------------------------------------------------
+
+CONTENIDO DE LA TABLA # 2:
+----------------------------------------------------
+
+CONTENIDO DE LA TABLA # 3:
+----------------------------------------------------
+
+CONTENIDO DE LA TABLA # 4:
+----------------------------------------------------
+

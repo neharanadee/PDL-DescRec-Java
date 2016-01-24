@@ -1,203 +1,36 @@
-< eol ,  >
-< eol ,  >
-< eol ,  >
-< eol ,  >
 < PalRes , var >
-< PalRes , char >
-< Id , s >
-< eol ,  >
+< PalRes , int >
+< Id , kk >
 < eol ,  >
 < PalRes , function >
 < PalRes , int >
-< Id , FactorialRecursivo >
-< ParAb , ( >
-< PalRes , int >
-< Id , n >
-< ParCer , ) >
-< eol ,  >
-< LlavAb , { >
-< eol ,  >
-< PalRes , if >
-< ParAb , ( >
-< Id , n >
-< OpRelacIgual , == >
-< Num , 0 >
-< ParCer , ) >
-< PalRes , return >
-< Num , 1 >
-< eol ,  >
-< PalRes , return >
-< Id , n >
-< OpAritSum , + >
-< Id , FactorialRecursivo >
-< ParAb , ( >
-< Id , n >
-< OpAritSum , + >
-< Num , 1 >
-< ParCer , ) >
-< eol ,  >
-< LlavCer , } >
-< eol ,  >
-< eol ,  >
-< PalRes , var >
-< PalRes , boolean >
-< Id , hola >
-< OpAsig , = >
-< Boolean , true >
-< eol ,  >
-< eol ,  >
-< eol ,  >
-< PalRes , function >
-< PalRes , int >
-< Id , FactorialFor >
-< ParAb , ( >
-< PalRes , int >
-< Id , n >
-< ParCer , ) >
-< eol ,  >
-< LlavAb , { >
-< eol ,  >
-< PalRes , var >
-< PalRes , int >
-< Id , i >
-< Coma , , >
-< Id , factorial >
-< OpAsig , = >
-< Num , 1 >
-< eol ,  >
-< PalRes , for >
-< ParAb , ( >
-< Id , i >
-< OpAsig , = >
-< Num , 1 >
-< PtComa , ; >
-< Id , i >
-< OpRelacIgual , == >
-< Id , n >
-< PtComa , ; >
-< Id , i >
-< OpAsig , = >
-< Id , i >
-< OpAritSum , + >
-< Num , 1 >
-< ParCer , ) >
-< eol ,  >
-< LlavAb , { >
-< eol ,  >
-< Id , factorial >
-< OpAsigMod , %= >
-< Id , i >
-< eol ,  >
-< LlavCer , } >
-< eol ,  >
-< PalRes , return >
-< Id , factorial >
-< eol ,  >
-< LlavCer , } >
-< eol ,  >
-< eol ,  >
-< PalRes , var >
-< PalRes , int >
-< Id , For >
-< Coma , , >
-< Id , Do >
-< OpAsig , = >
-< Num , 2 >
-< Coma , , >
-< Id , While >
-< OpAsig , = >
-< Num , 5 >
-< eol ,  >
-< eol ,  >
-< PalRes , function >
-< Id , imprime >
+< Id , funcInt >
 < ParAb , ( >
 < PalRes , char >
 < Id , msg >
-< Coma , , >
-< PalRes , int >
-< Id , f >
 < ParCer , ) >
 < eol ,  >
 < LlavAb , { >
 < eol ,  >
-< PalRes , write >
-< ParAb , ( >
-< Id , s >
-< ParCer , ) >
-< eol ,  >
-< PalRes , write >
-< ParAb , ( >
-< Id , msg >
-< ParCer , ) >
-< eol ,  >
-< PalRes , write >
-< ParAb , ( >
-< Id , f >
-< ParCer , ) >
-< eol ,  >
-< PalRes , write >
-< ParAb , ( >
-< Cadena , "\n" >
-< ParCer , ) >
-< eol ,  >
-< PalRes , return >
-< eol ,  >
-< LlavCer , } >
-< eol ,  >
-< eol ,  >
-< PalRes , function >
-< PalRes , char >
-< Id , cadena >
-< ParAb , ( >
+< PalRes , var >
 < PalRes , boolean >
-< Id , log >
-< ParCer , ) >
-< eol ,  >
-< LlavAb , { >
+< Id , bb >
 < eol ,  >
 < PalRes , if >
 < ParAb , ( >
-< Id , log >
-< OpLogAnd , && >
-< Id , log >
+< Id , bb >
 < ParCer , ) >
-< PalRes , return >
-< Id , s >
-< eol ,  >
-< PalRes , if >
-< ParAb , ( >
-< Id , log >
+< Id , bb >
+< OpAsig , = >
+< Id , kk >
+< OpRelacIgual , == >
+< Num , 9 >
 < OpLogAnd , && >
-< Id , log >
-< ParCer , ) >
-< PalRes , return >
-< Cadena , "Fin" >
+< Id , bb >
 < eol ,  >
+< PalRes , return >
+< Num , 8 >
 < eol ,  >
 < LlavCer , } >
-< eol ,  >
-< eol ,  >
-< eol ,  >
-< Id , s >
-< OpAsig , = >
-< Cadena , "El factorial " >
-< eol ,  >
-< eol ,  >
-< PalRes , write >
-< ParAb , ( >
-< Id , s >
-< ParCer , ) >
-< eol ,  >
-< PalRes , write >
-< ParAb , ( >
-< Cadena , "\nIntroduce un 'número'." >
-< ParCer , ) >
-< eol ,  >
-< PalRes , prompt >
-< ParAb , ( >
-< Id , num >
-< ParCer , ) >
-< eol ,  >
 < eol ,  >
 < eof ,  >

@@ -1,0 +1,57 @@
+/* Programa de ejemplo  */
+/******* José Luis Fuertes, 5, septiembre, 2015 *********/
+/* El ejemplo incorpora elementos del lenguaje opcionales y elementos que no hay que implementar */
+
+var char s	/* variable global cadena */
+
+function int FactorialRecursivo (int n)	/* n: parámetro formal de la función entera */
+{
+	if (3 == 2)	return 5
+	return n + FactorialRecursivo (n + 1)/* llamada recursiva */
+}
+
+var boolean hola
+
+function char FactorialFor (int n)	/* n: parámetro formal de la función entera */
+{
+	if (3 == 2)	return "hola"
+	return  5 /* llamada recursiva */
+}
+
+function int FactorialFor (int n)
+{
+	var int i	/* variables locales */
+	for (a = 2; i == 5; i = 5)
+	{
+		factorial %= 4
+	}
+	return i
+}
+
+var int For /* tres variables globales*/
+
+function imprime (char msg, int f)	/* función que recibe dos argumentos */
+{
+	write (s)
+	write (msg)
+	write (f)
+	write ("\n")	/* imprime un salto de línea */
+	return /* finaliza la ejecución de la función (en este caso, se podría omitir) */
+}
+
+function char cadena (boolean log)
+{
+	var boolean log1
+	log1 = false
+	if (log&&log1) return s
+	if (log&&log) return "Fin"
+	
+}	/* fin cadena: función que devuelve una cadena*/
+
+/* Parte del programa principal:*/
+s = "El factorial "	/* Primera sentencia que se ejecutaría*/
+
+write (s)
+write ("\nIntroduce un 'número'.")
+prompt (num)	/* se lee un número del teclado y se guarda en la variable global num */
+

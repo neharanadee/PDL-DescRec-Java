@@ -1,0 +1,108 @@
+P' -> P
+P -> eol P | B eol P | F eol P | eof
+Z -> eol Z | LAMBDA
+B -> var T id | if ( E ) S | S | for ( I ; E; A ) eol Z { eol Z C }
+S -> id S’ | return X | write ( E ) | prompt ( id )
+S’-> = E | %= E | ( L )
+T -> int | boolean | char
+T’-> T | LAMBDA
+X -> E | LAMBDA
+L -> E L’ | LAMBDA
+L’-> , E L’ | LAMBDA
+F -> function T’ id ( G ) eol Z { eol Z C }
+C -> B eol Z C | LAMBDA
+G -> T id G’ | LAMBDA
+G’-> , T id G’ | LAMBDA
+I -> id = E | LAMBDA
+A -> id A’ | LAMBDA
+A’ -> = E | %= E
+E -> R E’ 
+E’ -> && R E’ | LAMBDA
+R -> U R’
+R’ -> == U | LAMBDA
+U -> V U’
+U’ -> + V U’ | LAMBDA
+V -> id V’| ( E ) | numero | cadena | true | false
+V’ -> ( L ) | LAMBDA
+
+
+First(P) = { eol, eof, var, if, for, id, return, write, prompt, function }
+Follow(P) = { $ }
+
+First(P') = { eol, eof, var, if, for, id, return, write, prompt, function }
+Follow(P') = { $ }
+
+First(Z) = { eol, λ }
+Follow(Z) = { var, if, for, id, return, write, prompt, {, } }
+
+First(B) = { var, if, for, id, return, write, prompt } 
+Follow(B) = { eol }
+
+First(S) = { id, return, write, prompt }
+Follow(S) = { eol }
+
+First(S') = { =, %=, ( }
+Follow(S') = { eol }
+
+First(T) = { int, boolean, char }
+Follow(T) = { id }
+
+First(T') = { λ, int, boolean, char }
+Follow(T') = { id }
+
+First(X) = { λ, id, (, numero, cadena, true, false }
+Follow(X) = { eol }
+
+First(L) = { λ, id, (, numero, cadena, true, false }
+Follow(L) = { ) }
+
+First(L') = { ,, λ }
+Follow(L') = { ) }
+
+First(F) = { function }
+Follow(F) = { eol }
+
+First(C) = {  λ, var, if, for, id, return, write, prompt }
+Follow(C) = { } }
+
+First(G) = { λ, int, boolean, char }
+Follow(G) = { ) }
+
+First(G') = { ,, λ }
+Follow(G') = { ) }
+
+First(I) = { id, λ }
+Follow(I) = { ; }
+
+First(A) = { id, λ }
+Follow(A) = { ) }
+
+First(A') = { =, %= }
+Follow(A') = { ) }
+
+First(E) = { id, (, num, cadena, true, false }
+Follow(E) = { ), ,, ;, eol }
+
+First(E') = { &&, λ }
+Follow(E') = { ), ,, ;, eol }
+
+First(R) = { id, (, num, cadena, true, false }
+Follow(R) = { &&, ), ,, ;, eol }
+
+First(R') = { ==, λ }
+Follow(R') = { &&, ), ,, ;, eol }
+
+First(U) = { id, (, num, cadena, true, false }
+Follow(U) = { ==, &&, ), ,, ;, eol }
+
+First(U') = { +, λ }
+Follow(U') = { ==, &&, ), ,, ;, eol }
+
+First(V) = { id, (, num, cadena, true, false }
+Follow(V) = { +, ==, &&, ), ,, ;, eol }
+
+First(V') = { (, λ }
+Follow(V') = { +, ==, &&, ), ,, ;, eol }
+
+http://mdaines.github.io/grammophone/#/ll1-table
+http://hackingoff.com/compilers/predict-first-follow-set

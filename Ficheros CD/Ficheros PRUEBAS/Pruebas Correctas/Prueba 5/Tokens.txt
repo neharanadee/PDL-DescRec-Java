@@ -1,0 +1,63 @@
+< PalRes , function >
+< PalRes , boolean >
+< Id , funcBoolean >
+< ParAb , ( >
+< PalRes , boolean >
+< Id , bool >
+< ParCer , ) >
+< eol ,  >
+< LlavAb , { >
+< eol ,  >
+< PalRes , var >
+< PalRes , boolean >
+< Id , masmas >
+< eol ,  >
+< eol ,  >
+< PalRes , for >
+< ParAb , ( >
+< PtComa , ; >
+< Id , masmas >
+< OpRelacIgual , == >
+< Boolean , false >
+< PtComa , ; >
+< ParCer , ) >
+< eol ,  >
+< LlavAb , { >
+< eol ,  >
+< PalRes , if >
+< ParAb , ( >
+< Id , bool >
+< OpRelacIgual , == >
+< Boolean , false >
+< ParCer , ) >
+< Id , masmas >
+< OpAsig , = >
+< Boolean , true >
+< eol ,  >
+< LlavCer , } >
+< eol ,  >
+< PalRes , return >
+< Id , masmas >
+< eol ,  >
+< LlavCer , } >
+< eol ,  >
+< PalRes , if >
+< ParAb , ( >
+< Id , funcBoolean >
+< ParAb , ( >
+< Boolean , false >
+< ParCer , ) >
+< OpRelacIgual , == >
+< Boolean , true >
+< ParCer , ) >
+< PalRes , prompt >
+< ParAb , ( >
+< Id , num >
+< ParCer , ) >
+< eol ,  >
+< PalRes , write >
+< ParAb , ( >
+< Id , num >
+< ParCer , ) >
+< eol ,  >
+< eof ,  >

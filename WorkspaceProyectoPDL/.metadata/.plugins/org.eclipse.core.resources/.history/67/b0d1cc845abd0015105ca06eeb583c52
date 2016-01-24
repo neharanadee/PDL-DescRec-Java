@@ -1,0 +1,16 @@
+-
+function boolean funcBoolean(boolean bool)
+{
+	var boolean masmas /** Variable tabla 2 **/
+	
+	for(;true;) /** Inicialización y actualización vacías**/
+	{
+		var int i
+		i = 4 == "prueba"
+		i = i + false
+		if(funcBoolean(funcBoolean(masmas)) == false) masmas = return varGlobal		
+	}
+	return masmas
+}
+if (funcBoolean(false) == true) prompt(num)
+write(num)

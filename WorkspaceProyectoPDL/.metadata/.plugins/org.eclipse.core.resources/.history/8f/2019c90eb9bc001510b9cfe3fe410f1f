@@ -1,0 +1,17 @@
+/** Comentario segundo **/
+
+
+var char var1 /** Variable tabla 0 **/
+var boolean var2 /** Variable tabla 0 **/
+
+function char funcChar(int n)
+{
+	var1 = funcInt(13)
+	/** Comentario interno **/
+	return var1
+}
+
+var char var3	/** Variable tabla 0 **/
+var3 = "texto"  /** Inicialización variable tabla 0 **/
+
+write(var3)		/** Escribe lo que haya en var3 **/

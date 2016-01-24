@@ -1,0 +1,79 @@
+< PalRes , var >
+< PalRes , char >
+< Id , var1 >
+< eol ,  >
+< PalRes , var >
+< PalRes , boolean >
+< Id , var2 >
+< eol ,  >
+< eol ,  >
+< PalRes , function >
+< PalRes , char >
+< Id , funcChar >
+< ParAb , ( >
+< PalRes , int >
+< Id , n >
+< ParCer , ) >
+< eol ,  >
+< LlavAb , { >
+< eol ,  >
+< Id , var1 >
+< OpAsig , = >
+< Id , funcChar >
+< ParAb , ( >
+< Num , 13 >
+< ParCer , ) >
+< OpAritSum , + >
+< Num , 4 >
+< eol ,  >
+< PalRes , return >
+< Id , var1 >
+< eol ,  >
+< LlavCer , } >
+< eol ,  >
+< eol ,  >
+< PalRes , function >
+< PalRes , int >
+< Id , funcInt >
+< ParAb , ( >
+< PalRes , char >
+< Id , msg >
+< ParCer , ) >
+< eol ,  >
+< LlavAb , { >
+< eol ,  >
+< PalRes , if >
+< ParAb , ( >
+< ParAb , ( >
+< Id , var1 >
+< OpRelacIgual , == >
+< Id , funcChar >
+< ParAb , ( >
+< Num , 3 >
+< ParCer , ) >
+< ParCer , ) >
+< OpRelacIgual , == >
+< Boolean , true >
+< ParCer , ) >
+< PalRes , return >
+< Boolean , false >
+< eol ,  >
+< Id , x >
+< OpAsig , = >
+< Id , funcChar >
+< ParAb , ( >
+< Num , 3 >
+< ParCer , ) >
+< eol ,  >
+< LlavCer , } >
+< eol ,  >
+< eol ,  >
+< PalRes , write >
+< ParAb , ( >
+< Id , funcInt >
+< ParAb , ( >
+< Cadena , "prueba3" >
+< ParCer , ) >
+< ParCer , ) >
+< eol ,  >
+< eof ,  >

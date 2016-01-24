@@ -1,0 +1,25 @@
+var char var1 /** Variable tabla 0 **/
+var boolean var2 /** Variable tabla 0 **/
+
+function int funcInt2()
+{
+	return 10
+}
+
+function char funcChar(int n)
+{
+	var int i
+	
+	for(i = 0; funcInt2() == 5; i %= funcInt2())
+	{
+		var2 = var2 && false
+	}
+	return "pasa la prueba"
+}
+
+function int funcInt(char msg)
+{
+	if ((var1 == funcChar(3))==true) return 5 
+}
+
+

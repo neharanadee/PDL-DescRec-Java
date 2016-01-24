@@ -1,0 +1,18 @@
+/** Comentario primero 
+* de 
+* 4 líneas
+**/
+
+/** Comentario segundo **/
+
+function boolean funcBoolean()
+{
+	var boolean dev /* Variable tabla 2 **/
+	dev = false		/** Inicialización variable tabla 2 ****/
+	return dev /** Comentario tercero **/
+}
+
+var int variableGlobal /* Variable tabla 0*/
+
+write ("\nIntroduce un 'número'.")
+prompt (num)	/* se lee un número del teclado y se guarda en la variable global num */

@@ -1,3 +1,4 @@
 eclipse.preferences.version=1
 org.eclipse.debug.ui.VariableView.org.eclipse.jdt.debug.ui.show_static_variables=true
-org.eclipse.jdt.debug.ui.active_filters=analizadorlex.*,analizadorlex.Main,java.lang.ClassLoader
+org.eclipse.jdt.debug.ui.active_filters=analizadorlex.*
+org.eclipse.jdt.debug.ui.inactive_filters=com.ibm.*,com.sun.*,java.*,javax.*,jrockit.*,org.omg.*,pruebas.*,sun.*,sunw.*,analizadorlex.Main,java.lang.ClassLoader,pruebas.Main

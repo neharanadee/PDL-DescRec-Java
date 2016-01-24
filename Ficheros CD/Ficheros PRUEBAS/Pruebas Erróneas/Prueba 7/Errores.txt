@@ -1,0 +1,3 @@
+ERROR SEMÁNTICO  (línea 6): Función funcInt espera argumentos (int, char, boolean).
+ERROR SEMÁNTICO  (línea 9): El tipo de retorno de función no coincide con el declarado.
+ERROR SEMÁNTICO  (línea 13): Condicional espera tipo lógico.

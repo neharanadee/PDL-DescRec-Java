@@ -1,0 +1,26 @@
+CONTENIDO DE LA TABLA # 0:
+  * LEXEMA    : 'funcBoolean'
+    ATRIBUTOS :  (funcion)
+    + tipo    : 'boolean'
+    + param   : '' (no recibe parametros)
+
+  * LEXEMA    : 'variableGlobal'
+    ATRIBUTOS : 
+    + tipo    : 'int'
+    + despl   : 0
+
+  * LEXEMA    : 'num'
+    ATRIBUTOS : 
+    + tipo    : 'int'
+    + despl   : 2
+
+----------------------------------------------------
+
+CONTENIDO DE LA TABLA # 1:
+  * LEXEMA    : 'dev'
+    ATRIBUTOS : 
+    + tipo    : 'boolean'
+    + despl   : 0
+
+----------------------------------------------------
+

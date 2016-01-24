@@ -1,0 +1,13 @@
+var char var1 /** Variable tabla 0 **/
+var boolean var2 /** Variable tabla 0 **/
+
+function /** Comentario interno **/ char funcChar(int n)
+{
+	var1 = funcChar(13)
+	return var1
+}
+
+function int funcInt(char msg)
+{
+	if ((var1 == funcChar(3))==true) return 5 
+}

@@ -1,0 +1,9 @@
+ERROR SEMÁNTICO  (línea 13): Se asigna un tipo boolean a una variable tipo int.
+ERROR SEMÁNTICO  (línea 13): Sentencia incorrecta primera parte del for.
+ERROR SEMÁNTICO  (línea 13): Sólo se pueden sumar tipos iguales.
+ERROR SEMÁNTICO  (línea 13): Sentencia incorrecta segunda parte del for.
+ERROR SEMÁNTICO  (línea 13): Se asigna tipo boolean en %= , sólo se permite int.
+ERROR SEMÁNTICO  (línea 13): Se asigna un tipo boolean a una variable tipo int.
+ERROR SEMÁNTICO  (línea 13): Sentencia incorrecta tercera parte del for.
+ERROR SEMÁNTICO  (línea 21): Los return no son del mismo tipo.
+ERROR SEMÁNTICO  (línea 21): El tipo de retorno de función no coincide con el declarado.

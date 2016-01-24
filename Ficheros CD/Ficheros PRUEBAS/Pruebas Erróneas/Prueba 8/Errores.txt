@@ -1,0 +1,4 @@
+ERROR SEMÁNTICO  (línea 6): Sólo se pueden sumar tipos iguales.
+ERROR SEMÁNTICO  (línea 6): Se asigna tipo err a una variable tipo char.
+ERROR SEMÁNTICO  (línea 13): Se asigna tipo char a una variable tipo int.
+ERROR SEMÁNTICO  (línea 14): El tipo de retorno de función no coincide con el declarado.

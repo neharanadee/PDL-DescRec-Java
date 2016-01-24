@@ -1,0 +1,37 @@
+public static Entrada C(){//C -> B eol Z C | .
+		if(tokenActualIgual("var") 
+				|| tokenActualIgual("if") 
+				|| tokenActualIgual("for") 
+				|| tokenActualIgual("Id") 
+				|| tokenActualIgual("return") 
+				|| tokenActualIgual("write")
+				|| tokenActualIgual("prompt")){//First(BeolZC) = var, if, for, id, return, write, prompt
+			parser.add(31);
+			Entrada B = B();
+			compToken("eol");
+			Z();
+			Entrada C = C();
+
+			if ( !B.getRet().equals("null") && C.getRet().equals("null") ){ // varios return
+				if ( !B.getRet().equals(C.getRet()) ){ // return no coinciden
+					System.err.println("Error (linea "+linea()+"): los return no son del mismo tipo ");
+					return new Entrada (0,"null","err",0,null,"null",0);
+				}
+				return new Entrada(0,"null","null",B.getTam(),null,B.getRet(),0);
+
+			}else if ( B.getRet().equals("null") && C.getRet().equals("null") ) {// B no null, C null
+				return new Entrada(0,"null","null",B.getTam(),null,B.getRet(),0);
+
+			}else if ( B.getRet().equals("null") && C.getRet().equals("null") ) 	// B null, C no null
+				return new Entrada(0,"null","null",C.getTam(),null,C.getRet(),0);
+
+			return new Entrada (0,"null","null",0,null,"null",0); // ningun return de momento
+
+		}else if(tokenActualIgual("}")){// Follow(C) = }
+			parser.add(32);
+			// Nothing
+			return new Entrada (0,"null","null",0,null,"null",0);
+
+		}else
+			throw new RuntimeException("Error en C, no se ha aceptado ningún token");
+	}

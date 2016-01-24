@@ -1,0 +1,13 @@
+var int var1 /** Variable tabla 0 **/
+var boolean var2 /** Variable tabla 0 **/
+
+function int funcInt(int n, char msg, boolean j)
+{
+	var1 = funcInt(5, "prueba", var2)
+	/** Comentario interno **/
+	return var1
+}
+
+var char var3	/** Variable tabla 0 **/
+var3 = "texto"  /** Inicialización variable tabla 0 **/
+if(funcInt(1,"",var2) == 3) write(var3)		/** Escribe lo que haya en var3 **/

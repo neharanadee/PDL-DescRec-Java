@@ -1,0 +1,51 @@
+CONTENIDO DE LA TABLA # 0:
+  * LEXEMA    : 'var1'
+    ATRIBUTOS : 
+    + tipo    : 'int'
+    + despl   : 0
+
+  * LEXEMA    : 'var2'
+    ATRIBUTOS : 
+    + tipo    : 'boolean'
+    + despl   : 2
+
+  * LEXEMA    : 'funcInt'
+    ATRIBUTOS :  (funcion)
+    + tipo    : 'int'
+    + param 1 : 'int'
+    + param 2 : 'char'
+    + param 3 : 'boolean'
+
+  * LEXEMA    : 'var5'
+    ATRIBUTOS : 
+    + tipo    : 'int'
+    + despl   : 3
+
+  * LEXEMA    : 'var3'
+    ATRIBUTOS : 
+    + tipo    : 'char'
+    + despl   : 5
+
+----------------------------------------------------
+
+CONTENIDO DE LA TABLA # 1:
+  * LEXEMA    : 'n'
+    ATRIBUTOS : 
+    + tipo    : 'int'
+    + despl   : 0
+
+  * LEXEMA    : 'msg'
+    ATRIBUTOS : 
+    + tipo    : 'char'
+    + despl   : 2
+
+  * LEXEMA    : 'j'
+    ATRIBUTOS : 
+    + tipo    : 'boolean'
+    + despl   : 6
+
+----------------------------------------------------
+
+CONTENIDO DE LA TABLA # 2:
+----------------------------------------------------
+
